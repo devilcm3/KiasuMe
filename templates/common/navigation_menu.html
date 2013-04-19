@@ -1,0 +1,17 @@
+<nav class="top-bar">
+	<section class="top-bar-section">
+<ul id="navigation-bak">
+{% for link in links %}
+	<li class="{{ link.active }}"><a href="/promotion/{{ link.id }}/{{ link.name }}">{{ link.name }}</a></li>
+{% endfor %}
+	<li class="right search_box">
+	<form action="/promotion/search/" method="GET">
+		<input placeholder="Search simi? ..." name="q">
+		<a href="#" class="general foundicon-search">
+		<input type="submit" id="search_submit"/>
+		</a>
+	</form>
+	</li>
+</ul>
+	</section>
+</nav>

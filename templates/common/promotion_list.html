@@ -1,0 +1,52 @@
+{% for promotion in promotions %}
+<div class="row_wrapper">
+	<div class="row">
+		<div class="large-16 columns">
+			<h5 class="promotion_title">
+				<a href="/promotion/view//{{ promotion.id }}">{{ promotion.title }}</a>
+			</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 columns">
+			<h5 class="promotion_small">
+				<small>
+					<span>By {{ promotion.member_pk.username | upper }}</span>
+					<span>Category : <a href="/promotion/{{ promotion.category_pk.id }}/{{ promotion.category_pk.name }}">{{ promotion.category_pk.name }}</a> /
+									 <a href="/promotion/{{ promotion.category_pk.id }}/{{ promotion.category_pk.name }}/{{ promotion.subcategory_pk.id }}/{{ promotion.subcategory_pk.name }}">{{ promotion.subcategory_pk.name }}</a>
+					</span>
+				</small>
+			</h5>
+			<p class="promotion_description">{{ promotion.content | safe }}</p>
+		</div>
+		<div class="large-4 columns">
+			{% if promotion.promo_thumbnail %}
+				<img src="{{ MEDIA_URL }}{{ promotion.promo_thumbnail }}">
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-3 columns thumbs_wrapper" promo_id="{{ promotion.id}}">
+			<a class="like_promotion" promo_vote="1" ><i class="social foundicon-thumb-up"></i></a>
+			<h4 class="vote_display color">{{ promotion.total_vote|floatformat:"0" }}</h4>
+			<a class="dislike_promotion" promo_vote="-1" ><i class="social foundicon-thumb-down"></i></a>
+		</div>
+		<div class="large-13 columns">
+						<h5 class="promotion_small">
+			<small><span>Posted : {{ promotion.date_created | date:"l, d F - h:i A" }}</span></small>
+			</h5>
+		</div>
+	</div>
+</div>
+{% endfor %}
+<div class="pagination-centered">
+<ul class="pagination">
+	{% if promotions.has_previous %}
+	<li class="arrow"><a href="{{ pagination_url }}{{ promotions.previous_page_number }}">PREVIOUS</a></li>
+	{% endif %}
+
+	{% if promotions.has_next %}
+	<li class="arrow"><a href="{{ pagination_url }}{{ promotions.next_page_number }}">NEXT</a></li>
+	{% endif %}
+</ul>
+</div>

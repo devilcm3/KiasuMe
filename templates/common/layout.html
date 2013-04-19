@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load promotion_tags %}
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<meta name="google-site-verification" content="ku1rolTmITGzkhkMlaY9qZjNN31vRHyZY1aRORX8Kfk" />
+	{# <title>Code0 (Code Zero) - {% block page_title %}Home{% endblock page_title %} | David Tjokroaminoto, Web developer in Melbourne, Australia</title> #}
+	<meta name="description" content=" Website Diskon No.1 di Kota Medan!">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/foundicons.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/foundation.css">
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/layout.css">
+	{% block css %}
+	{# CUSTOM STYLESHEETS FROM VIEW #}
+	{% endblock css %}
+
+	<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/custom.modernizr.js"></script>
+</head>
+<body>
+	<div class="row">
+		<div class="large-6 columns">
+			<a href="/" id="website_title">
+				<h2>KIASU<span>MAX</span></h2><h6 class="subheader"> got discount bo?</h6>
+			</a>
+		</div>
+		<div class="large-9 columns" id="login_navigation">
+			{% if user.is_authenticated %}
+				<a href="/logout/" class="button small secondary right">Logout</a>
+				<a href="" class="button small right">Hi, {{ user.first_name }} !</a>
+				<a id="new_promotion" href="/promotion/new" class="button small right">post a deal</a>
+			{% else %}
+				<a href="/login/" class="button small secondary right">Login</a>
+				<a href="/register/" class="button small right">Register</a>
+				<a href="{% url 'socialauth_begin' 'twitter' %}" class="button small right social_button" id="twitter_button">t</a>
+				<a href="{% url 'socialauth_begin' 'facebook' %}" class="button small right social_button" id="facebook_button">f</a>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-16 columns">
+				{% show_navigation_menu active=nav %}
+		</div>
+	</div>
+	<div class="row">
+		{% block master_override_block %}
+		<div id="content" class="large-11 columns">
+			{% block content_block %}
+				{% include "common/promotion_list.html" %}
+			{% endblock content_block %}
+		</div>
+		<div id="sidebar" class="large-5 columns">
+			{% block sidebar_block %}
+				{% include "common/hot_sidebar.html" %}
+			{% endblock sidebar_block %}
+		</div>
+		{% endblock master_override_block %}
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery.cookie.js" type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}js/foundation.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/layout.js"></script>
+	{% block javascript %}
+	{# CUSTOM JAVASCRIPT FROM VIEW #}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/promotion/index_view.js"></script>
+	{% endblock javascript %}
+</body>
+</html>

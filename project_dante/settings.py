@@ -1,17 +1,20 @@
 # Django settings for project_dante project.
 import os,django,dj_database_url
 
+AWS_ACCESS_KEY_ID = "AKIAJB3JQ6PX7NFMSQQA"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "dantecdnsgp"
+AWS_QUERYSTRING_AUTH = False
+S3_URL = 'https://%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir))
-# AUTH_USER_MODEL = 'member.Profile'
+AUTH_USER_MODEL = 'member.Profile'
 
 ADMINS = (('David Tjokroaminoto', 'david.tjokroaminoto@gmail.com'))
-
-AUTH_USER_MODEL = 'member.Profile'
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -28,17 +31,21 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['--NONE--']
+ALLOWED_HOSTS = ['*']
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = '/login-error/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Asia/Jakarta'
+TIME_ZONE = 'Asia/Singapore'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 
@@ -60,7 +67,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = S3_URL + '/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -70,11 +77,10 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = S3_URL + '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # '',os.path.join(PROJECT_ROOT,'static/')
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -133,12 +139,31 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
-    # 'tastypie',
-    'member'
+    'social_auth',
+    'member',
+    'promotion',
+    'store',
+    'django_cleanup',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+FACEBOOK_APP_ID = '139156246267349'
+FACEBOOK_API_SECRET = '9fae1ebd0fb9912bf9b1e9d47c735795'
+TWITTER_CONSUMER_KEY = 'i4yaIqzsHJLLufcYXnzFQ'
+TWITTER_CONSUMER_SECRET = 'IIHqHtRp61PJEZiJGLuLzaLRunmURKM1g0DjTBIgeA'
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+SOCIAL_AUTH_USER_MODEL = 'member.Profile'
+SOCIAL_AUTH_DEFAULT_USERNAME = 'social_profile'
 
 SOUTH_MIGRATION_MODULES = {
     'member':'ignore',
+    'social_auth':'ignore',
 }
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

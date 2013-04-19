@@ -1,0 +1,34 @@
+{% extends "common/layout.html" %}
+{% block content_block %}
+<div id="search_results">
+	<p>Search results for : <b>{{ query }}</b></p>
+<gcse:searchresults-only></gcse:searchresults-only>
+</div>
+{% endblock content_block %}
+{% block javascript %}
+<script>
+  (function() {
+    var cx = '002153813743513564411:ugwhx6zpg9a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  $(document).ready(function(){
+  	var interval = setInterval(function(){
+  		var gse = google.search.cse.element.getElement('searchresults-only0');
+  		if(gse != null){
+  			gse.execute("{{ query }}");
+  			clearInterval(interval);
+  		}	
+  	},1000);
+  })
+</script>
+{% endblock javascript %}
+{% block sidebar_block %}
+	
+{% endblock sidebar_block %}

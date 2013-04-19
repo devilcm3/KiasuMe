@@ -1,0 +1,25 @@
+{% extends "common/layout.html" %}
+{% block master_override_block %}
+	<div class="row logging_wrapper">
+		<div class="large-6 columns large-centered">
+			<fieldset class="social_login_wrapper">
+				<legend>Social Network</legend>
+				<a href="{% url 'socialauth_begin' 'facebook' %}" ><img src="{{ STATIC_URL }}images/facebook_button.png"></a>
+				<a href="{% url 'socialauth_begin' 'twitter' %}" ><img src="{{ STATIC_URL }}images/twitter_button.png"></a>
+			</fieldset>
+			<fieldset>
+				<legend>Login using account</legend>
+			<form method="post" action="/login/" class="wide">
+				{% csrf_token %}
+				{# <label for="id_username">username</label> #}
+				<input name="username" id="id_username" type="input" placeholder="username">
+
+				{# <label for="id_password">password</label> #}
+				<input name="password" id="id_password" type="password" placeholder="password">
+
+				<input type="submit" value="LOG ME IN" id="log_me_in">
+			</form>
+			</fieldset>
+		</div>
+	</div>
+{% endblock master_override_block %}
