@@ -17,9 +17,9 @@ def hot_deals(category_id = None):
 		datetime.combine(date.today(),time.max)
 	]
 	if category_id:
-		return Deal.objects.filter(date_created__range=(today[0],today[1])).filter(category_pk=category_id).filter(active=True).filter(total_vote__gt = 0).order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__range=(today[0],today[1])).filter(category_pk=category_id, active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
 	else:
-		return Deal.objects.filter(date_created__range=(today[0],today[1])).filter(active=True).filter(total_vote__gt = 0).order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__range=(today[0],today[1])).filter(active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
 
 
 def index(request, page_num = 1):
@@ -63,17 +63,18 @@ def category(request, category_id, category_name, subcategory_id = None, subcate
 	if not page_num: page_num = 1
 	context = {
 	'deals':pages.page(page_num),
-	'hot_deals':hot_deals(),
+	'hot_deals':hot_deals(category_id),
 	'nav':category_name,
 	'pagination_url':pagination_url
 	}
 	return render(request,'common/layout.html',context)
 
-@login_required
 def vote(request):
-	if request.is_ajax():
+	if request.user.is_authenticated() and request.is_ajax():
 		Deal.vote(request.POST['promo_id'], request.POST['promo_vote'])
-		return HttpResponse('ok',mimetype='application/json')
+		return HttpResponse(status = 200)
+	else:
+		return HttpResponse(status = 401)
 
 @login_required
 def create_new_deal(request):

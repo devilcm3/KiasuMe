@@ -40,6 +40,7 @@ class Deal(models.Model):
 		return "%s/%s/%s%s" %("media/deal", date.today().strftime("%Y/%m/%d"), uuid4(), '.jpeg')
 
 	title			= models.CharField(max_length=200, blank = False)
+	slug			= models.SlugField(max_length=200, blank = True)
 	link 			= models.URLField(max_length=200, blank = True)
 	content 		= models.TextField(blank = False)
 	active			= models.BooleanField(default = True)
@@ -68,6 +69,9 @@ class Deal(models.Model):
 		Deal.objects.filter(id=promo_id).update(total_vote=models.F('total_vote') + vote)
 
 	def save(self, *args, **kwargs):
+		from django.utils.text import slugify
+		self.slug = slugify(self.title)
+
 		if(hasattr(self.promo_image,'file')):
 			self.promo_thumbnail = "%s/%s/%s%s" %("media/deal", date.today().strftime("%Y/%m/%d"), uuid4(), '.jpeg')
 			super(Deal,self).save(*args, **kwargs)

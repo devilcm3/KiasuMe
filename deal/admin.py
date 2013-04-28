@@ -12,7 +12,7 @@ class DealRatingAdmin(admin.ModelAdmin):
 class DealAdmin(admin.ModelAdmin):
 	form = DealForm
 
-	list_display = ('id','title','member_pk','active','total_vote','date_created','date_modified','date_started','date_ended','promo_image','promo_thumbnail')
+	list_display = ('id','title','member_pk','active','total_vote','date_created','date_modified','date_started','date_ended','promo_image','promo_thumbnail','slug')
 	fieldsets = (
 		('Main Information',{'fields' : ('title','content') }),
 		('Category',{'fields':('category_pk','subcategory_pk')}),

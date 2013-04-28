@@ -8,7 +8,7 @@
 	{% if hot_deals %}
 	<ol id="hot_deal_list">
 	{% for deal in hot_deals %}
-	<li><a href="/deal/view/{{ deal.id }}">{{ deal.title }}</a></li>
+	<li><a href="/deal/view/{{ deal.id }}/{{ deal.slug }}">{{ deal.title }}</a></li>
 	{% endfor %}
 	</ol>
 	{% else %}

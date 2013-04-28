@@ -111,6 +111,12 @@ div.thumbs_wrapper h4{
 .dislike_deal.color{
 	color: #BA002D;
 }*/
+a.vote_login_prompt{
+	display: block;
+    font-size: 0.8em;
+    color: #1D84E6;
+    margin-bottom: 0.5em;
+}
 .promo_category{
 	padding: 0 !important;
 }
