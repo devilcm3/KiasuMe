@@ -8,18 +8,10 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Province'
-        db.create_table(u'store_province', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal(u'store', ['Province'])
-
         # Adding model 'Area'
         db.create_table(u'store_area', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('province_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Province'])),
         ))
         db.send_create_signal(u'store', ['Area'])
 
@@ -29,13 +21,15 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('address', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('postcode', self.gf('django.db.models.fields.IntegerField')(max_length=10)),
-            ('phone_1', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
-            ('phone_2', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
+            ('landline_1', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
+            ('landline_2', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
+            ('mobile', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('fax', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True)),
+            ('website', self.gf('django.db.models.fields.SlugField')(max_length=50, blank=True)),
             ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
             ('total_vote', self.gf('django.db.models.fields.FloatField')(default=0)),
             ('member_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['member.Profile'])),
-            ('province_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Province'])),
             ('area_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Area'])),
         ))
         db.send_create_signal(u'store', ['Store'])
@@ -51,9 +45,6 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        # Deleting model 'Province'
-        db.delete_table(u'store_province')
-
         # Deleting model 'Area'
         db.delete_table(u'store_area')
 
@@ -85,83 +76,97 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'deal.category': {
+            'Meta': {'object_name': 'Category'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'priority': ('django.db.models.fields.IntegerField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'})
+        },
+        u'deal.deal': {
+            'Meta': {'object_name': 'Deal'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'category_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Category']"}),
+            'content': ('django.db.models.fields.TextField', [], {}),
+            'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date_ended': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2013, 4, 20, 0, 0)'}),
+            'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'date_started': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2013, 4, 20, 0, 0)'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'link': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'blank': 'True'}),
+            'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']", 'blank': 'True'}),
+            'promo_file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'blank': 'True'}),
+            'promo_image': ('django.db.models.fields.files.ImageField', [], {'max_length': '250', 'blank': 'True'}),
+            'promo_thumbnail': ('django.db.models.fields.SlugField', [], {'default': "'media/deal/2013/04/20/d8582c0f-a30f-4dc1-b32d-35ae70d5b53e.jpeg'", 'max_length': '250', 'null': 'True', 'blank': 'True'}),
+            'subcategory_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Subcategory']", 'null': 'True', 'blank': 'True'}),
+            'tag_pk': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['deal.Tag']", 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'total_vote': ('django.db.models.fields.FloatField', [], {'default': '0', 'blank': 'True'})
+        },
+        u'deal.dealrating': {
+            'Meta': {'object_name': 'DealRating'},
+            'deal_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Deal']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']"}),
+            'vote': ('django.db.models.fields.NullBooleanField', [], {'default': 'None', 'null': 'True', 'blank': 'True'})
+        },
+        u'deal.subcategory': {
+            'Meta': {'object_name': 'Subcategory'},
+            'category_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Category']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'priority': ('django.db.models.fields.IntegerField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'})
+        },
+        u'deal.tag': {
+            'Meta': {'object_name': 'Tag'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '10'})
+        },
         u'member.profile': {
             'Meta': {'object_name': 'Profile'},
             'address': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'deal_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['deal.Deal']", 'through': u"orm['deal.DealRating']", 'symmetrical': 'False'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'fax': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'full_name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'landline_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'landline_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'middle_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'mobile': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'phone_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'phone_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'promotion_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['promotion.Promotion']", 'through': u"orm['promotion.PromotionRating']", 'symmetrical': 'False'}),
             'store_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['store.Store']", 'through': u"orm['store.StoreRating']", 'symmetrical': 'False'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        u'promotion.promotion': {
-            'Meta': {'object_name': 'Promotion'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {}),
-            'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'date_ended': ('django.db.models.fields.DateTimeField', [], {}),
-            'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'date_started': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 4, 3, 0, 0)'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']"}),
-            'promo_file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'blank': 'True'}),
-            'promo_image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
-            'tag_pk': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['promotion.Tag']", 'symmetrical': 'False'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'total_vote': ('django.db.models.fields.FloatField', [], {'default': '0'})
-        },
-        u'promotion.promotionrating': {
-            'Meta': {'object_name': 'PromotionRating'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']"}),
-            'promotion_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['promotion.Promotion']"}),
-            'vote': ('django.db.models.fields.NullBooleanField', [], {'default': 'None', 'null': 'True', 'blank': 'True'})
-        },
-        u'promotion.tag': {
-            'Meta': {'object_name': 'Tag'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '10'})
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
+            'website': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'blank': 'True'})
         },
         u'store.area': {
             'Meta': {'object_name': 'Area'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'province_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Province']"})
-        },
-        u'store.province': {
-            'Meta': {'object_name': 'Province'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'store.store': {
             'Meta': {'object_name': 'Store'},
             'address': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'area_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Area']"}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'fax': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
+            'landline_1': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'landline_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']"}),
+            'mobile': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'phone_1': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'phone_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'postcode': ('django.db.models.fields.IntegerField', [], {'max_length': '10'}),
-            'province_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Province']"}),
-            'total_vote': ('django.db.models.fields.FloatField', [], {'default': '0'})
+            'total_vote': ('django.db.models.fields.FloatField', [], {'default': '0'}),
+            'website': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'blank': 'True'})
         },
         u'store.storerating': {
             'Meta': {'object_name': 'StoreRating'},

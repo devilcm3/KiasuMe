@@ -1,0 +1,78 @@
+{% extends "member/cpanel/index.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+{% endblock css %}
+{% block cpanel_profile_block %}
+<div class="new_deal_wrapper">
+	<div class="row">
+		<div class="large-16 columns">
+		<form class="member_edit_deal deal_form" action="/member/cpanel/deals/edit/{{ deal.id }}/" method="POST" enctype="multipart/form-data">
+			{% if form.non_field_errors %}
+			<fieldset class="row error_wrapper">
+				<legend>Errors</legend>
+				<div class="large-16 columns">
+					{{ form.non_field_errors }}
+				</div>
+			</fieldset>
+			{% endif %}
+			<fieldset class="main_info row">
+					<legend>Main Info <small>( Title max chars : 100 )</small></legend>
+					<div class="large-16 columns">
+						{{ form.title.label_tag }}{{ form.title.errors }}{{ form.title }}
+					</div>
+					<div class="large-16 columns">
+						{{ form.content.label_tag }}{{ form.content.errors }}{{ form.content }}
+					</div>
+			</fieldset>
+			<fieldset class="dates row">
+					<legend>Date</legend>
+					<div class="large-7 columns">
+					<div class="row">
+					<div class="large-16 columns">					
+					{{ form.date_started.label_tag }}{{ form.date_started.errors }}{{ form.date_started }}
+					</div>
+					</div>
+					<div class="row">
+					<div class="large-16 columns">
+					{{ form.date_ended.label_tag }}{{ form.date_ended.errors }}{{ form.date_ended }}
+					</div>
+					</div>
+			</fieldset>
+			<fieldset class="files row">
+				<legend>Images and Files <small>( Size Limit : 2MB )</small></legend>
+				<div class="large-14 columns">
+				{{ form.promo_image.label_tag }}{{ form.promo_image }}
+				{{ form.promo_file.label_tag }}{{ form.promo_file }}
+				</div>
+			</fieldset>
+			<fieldset class="category row">
+				<legend>Categorize Deal</legend>
+				<div class="large-7 columns">
+					<div class="row">				
+						<div class="large-16 columns">
+						<label for="id_category_pk">Category</label>
+						{{ form.category_pk }}
+						{{ form.category_pk.errors }}
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-16 columns">
+						<label for="id_subcategory_pk">Sub Category</label>
+						{{ form.subcategory_pk }}
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			{% csrf_token %}
+			 <input type="button" value="CANCEL" class="button small tertiary" onclick="cancelEdit('/member/cpanel/deals/')">
+			 <input type="submit" value="SUBMIT DEAL" class="button small">
+		</form>
+		</div>
+	</div>
+</div>
+{% endblock cpanel_profile_block %}
+{% block javascript %}
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/deal/new_deal.js"></script>
+{% endblock javascript %}

@@ -1,0 +1,81 @@
+{% extends "common/layout.html" %}
+{% block master_override_block %}
+<div class="large-16 columns member_wrapper">
+<div class="row">
+	<div class="large-16 columns">
+		<h4>Member Details</h4>
+	</div>
+</div>
+<div class="row">
+	<div class="large-3 columns">
+		<ul id="member_menu_list">
+			<li class="{{ menu_active.profile }}"><a href='/member/cpanel/'>PROFILE</a></li>
+			<li class="{{ menu_active.deals }}"><a href='/member/cpanel/deals/'>DEALS</a></li>
+		</ul>
+	</div>
+	<div class="large-13 columns">
+	{% block cpanel_profile_block %}
+		<div class="row">
+			<div class="large-16 columns">
+			<table>
+			<tr>
+				<td>Last Seen</td>
+				<td>{{ profile.last_login }}</td>
+			</tr>
+			<tr>
+				<td>Username</td>
+				<td>{{ profile.username }}</td>
+			</tr>
+			<tr>
+				<td>Full Name</td>
+				<td>{{ profile.first_name }} {{ profile.middle_name }} {{ profile.last_name }}</td>
+			</tr>
+			<tr>
+				<td>Date Joined</td>
+				<td>{{ profile.date_joined | date:"d F Y" }}</td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td>{{ profile.address }}</td>
+			</tr>
+			<tr>
+				<td>Landline - 1</td>
+				<td>{{ profile.landline_1 }}</td>
+			</tr>
+			<tr>
+				<td>Landline - 2</td>
+				<td>{{ profile.landline_2 }}</td>
+			</tr>
+			<tr>
+				<td>Mobile Phone</td>
+				<td>{{ profile.mobile }}</td>
+			</tr>
+			<tr>
+				<td>Fax</td>
+				<td>{{ profile.fax }}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>{{ profile.email }}</td>
+			</tr>
+			<tr>
+				<td>Website</td>
+				<td>{{ profile.website }}</td>
+			</tr>
+		</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-16 columns">
+				<a href="/member/cpanel/edit" id="edit_profile" class="button small secondary large-4">EDIT PROFILE</a><br>
+				<a href="/member/cpanel/change_password" id="edit_profile" class="button small secondary large-4">CHANGE PASSWORD</a>	
+			</div>
+		</div>
+		{% endblock cpanel_profile_block %}
+	</div>
+</div>
+</div>
+{% endblock master_override_block %}
+{% block javascript %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/member/public.js"></script>
+{% endblock javascript %}

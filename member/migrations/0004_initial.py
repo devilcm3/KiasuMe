@@ -23,8 +23,8 @@ class Migration(SchemaMigration):
             ('date_joined', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('full_name', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('address', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('phone_1', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('phone_2', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
+            ('landline_1', self.gf('django.db.models.fields.CharField')(max_length=30)),
+            ('landline_2', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('fax', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('mobile', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
         ))
@@ -96,8 +96,8 @@ class Migration(SchemaMigration):
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'mobile': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'phone_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'phone_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'landline_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'landline_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         }

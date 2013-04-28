@@ -1,11 +1,26 @@
 <nav class="top-bar">
-	<section class="top-bar-section">
-<ul id="navigation-bak">
+<ul class="title-area">
+<li class="name">
+    
+    </li>
+	<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+</ul>
+<section class="top-bar-section">
+<ul id="navigation-bak" class="left">
 {% for link in links %}
-	<li class="{{ link.active }}"><a href="/promotion/{{ link.id }}/{{ link.name }}">{{ link.name }}</a></li>
+	<li class="{{ link.active }} has-dropdown">
+		<a href="/deal/{{ link.id }}/{{ link.name }}">{{ link.name }}</a>
+		<ul class="dropdown">
+		{% for subcat in link.subcats %}
+		<li><a href="/deal/{{ link.id }}/{{ link.name }}/{{ subcat.id }}/{{ subcat.name }}">{{ subcat.name }}</a></li>
+		{% endfor %}
+		</ul>
+	</li>
 {% endfor %}
-	<li class="right search_box">
-	<form action="/promotion/search/" method="GET">
+</ul>
+<ul class="right">
+	<li class="search_box">
+	<form action="/deal/search/" method="GET">
 		<input placeholder="Search simi? ..." name="q">
 		<a href="#" class="general foundicon-search">
 		<input type="submit" id="search_submit"/>
@@ -13,5 +28,5 @@
 	</form>
 	</li>
 </ul>
-	</section>
+</section>
 </nav>

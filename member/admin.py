@@ -35,18 +35,18 @@ class ProfileAdmin(UserAdmin):
 	#CANNOT BE THE SAME AS CLASSNAME USERCHANGEFORM, CLASH
 	form = ProfileChangeForm
 	add_form = ProfileCreationForm
-	list_display = ('id','username','email','first_name','last_name','phone_1','is_staff',)
+	list_display = ('id','username','password','email','first_name','last_name','landline_1','is_staff','date_joined')
 	fieldsets = (
         (None, {'fields': ('username',)}),
         (('Personal Info'), {'fields': ('first_name','middle_name','last_name','address')}),
-        (('Contact'), {'fields': ('phone_1','phone_2','fax','email')}),
+        (('Contact'), {'fields': ('landline_1','landline_2','fax','email')}),
         (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 	add_fieldsets = ((None,{'fields':('username','password1','password2')}),
 		('Personal Info',{'fields':('first_name','middle_name','last_name','address',)}),
-		(('Contact'), {'fields': ('phone_1','phone_2','fax','email')}),
+		(('Contact'), {'fields': ('landline_1','landline_2','fax','email')}),
 	)
 
 admin.site.register(Profile,ProfileAdmin)

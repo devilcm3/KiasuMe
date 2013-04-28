@@ -1,19 +1,19 @@
 <div id="top_votes">
 	{% if nav == 'Home'%}
-		<h5>BEST OF TODAY</h5>
+		<h5>Today's Best</h5>
 	{% else %}
-		<h5>BEST IN THIS CATEGORY</h5>
+		<h5>Hot in <span><i>{{ nav }}</i></span></h5>
 	{% endif %}
 
-	{% if hot_promotions %}
-	<ol id="hot_promotion_list">
-	{% for promotion in hot_promotions %}
-	<li><a href="/promotion/{{ promotion.id }}/view/">{{ promotion.title }}</a></li>
+	{% if hot_deals %}
+	<ol id="hot_deal_list">
+	{% for deal in hot_deals %}
+	<li><a href="/deal/view/{{ deal.id }}">{{ deal.title }}</a></li>
 	{% endfor %}
 	</ol>
 	{% else %}
 	<h6>Oops, still no hot deals today.<br>
-		Why don't you <a href="/promotion/new">post a deal </a>?
+		Why don't you <a href="/deal/new">post a deal </a>?
 	</h6>
 	{% endif %}
 </div>

@@ -1,0 +1,26 @@
+{% extends "member/cpanel/index.html" %}
+{% block cpanel_profile_block %}
+{% if deals %}
+	<table class="member_deal_list_edit">
+		<tr>
+			<th>Vote</th>
+			<th>Title</th>
+			<th>Date Posted /<br> Date Modified</th>
+			<th>Actions</th>
+		</tr>
+	{% for deal in deals %}
+		<tr>
+			<td><h6>{{ deal.total_vote | floatformat:0 }}</h6></td>
+			<td><p><a href="/deal/view/{{ deal.id }}" target="_blank">{{ deal.title }}</a></p></td>
+			<td>{{ deal.date_created }} / <br>{{ deal.date_modified }}</td>
+			<td>
+				<a href="/member/cpanel/deals/edit/{{ deal.id }}"><i class="general foundicon-edit"></i></a>
+				<a href="/member/cpanel/deals/delete/{{ deal.id }}"><i class="general foundicon-remove"></i></a>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<h6>Oops, you still haven't posted any deals yet</h6>
+{% endif %}
+{% endblock cpanel_profile_block %}

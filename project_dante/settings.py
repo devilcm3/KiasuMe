@@ -7,7 +7,7 @@ AWS_STORAGE_BUCKET_NAME = "dantecdnsgp"
 AWS_QUERYSTRING_AUTH = False
 S3_URL = 'https://%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
@@ -26,6 +26,15 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '5432',                      # Set to empty string for default.
+    },
+    'webfaction': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'project_dante',                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': 'davidcokro_12',
+        'PASSWORD': '',
+        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',                      # Set to empty string for default.    
     }
 }
 
@@ -141,7 +150,7 @@ INSTALLED_APPS = (
     'south',
     'social_auth',
     'member',
-    'promotion',
+    'deal',
     'store',
     'django_cleanup',
 )
@@ -156,6 +165,7 @@ FACEBOOK_APP_ID = '139156246267349'
 FACEBOOK_API_SECRET = '9fae1ebd0fb9912bf9b1e9d47c735795'
 TWITTER_CONSUMER_KEY = 'i4yaIqzsHJLLufcYXnzFQ'
 TWITTER_CONSUMER_SECRET = 'IIHqHtRp61PJEZiJGLuLzaLRunmURKM1g0DjTBIgeA'
+TWITTER_EXTENDED_PERMISSIONS = ['email']
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 SOCIAL_AUTH_USER_MODEL = 'member.Profile'
@@ -193,6 +203,13 @@ LOGGING = {
         },
     }
 }
+
+# EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'SMTP.LIVE.COM'
+EMAIL_HOST_USER = 'NO-REPLY@KIASU.ME'
+EMAIL_HOST_PASSWORD = 'yUz8sf3XGmVNLQ'
+EMAIL_USE_TLS = True
 
 try:
     from local_settings import *

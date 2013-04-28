@@ -13,8 +13,8 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
             ('address', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('phone_1', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('phone_2', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
+            ('landline_1', self.gf('django.db.models.fields.CharField')(max_length=30)),
+            ('landline_2', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('fax', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('mobile', self.gf('django.db.models.fields.CharField')(max_length=30, blank=True)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=200, blank=True)),
@@ -75,8 +75,8 @@ class Migration(SchemaMigration):
             'fax': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'mobile': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'phone_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'phone_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'landline_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'landline_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
         }
     }

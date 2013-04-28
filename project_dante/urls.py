@@ -4,6 +4,10 @@ from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.db.models.loading import cache as model_cache
+if not model_cache.loaded:
+    model_cache.get_models()
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,12 +18,11 @@ urlpatterns = patterns('',
 
     url(r'',include('social_auth.urls')),
 
-    url(r'^$','promotion.views.index',name="home"),
+    url(r'^$','deal.views.index',name="home"),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^manage/',include(admin.site.urls)),
-    url(r'^promotion/',include('promotion.urls',namespace="promotion")),
-    # url(r'^$', 'project_dante.views.home', name='home'),
-    # url(r'^project_dante/', include('project_dante.foo.urls')),
+    url(r'^deal/',include('deal.urls',namespace="deal")),
+    url(r'^member/',include('member.urls',namespace="member")),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

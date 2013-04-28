@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-{% load promotion_tags %}
+{% load deal_tags %}
 <html>
 <head>
 	<meta name="viewport" content="width=device-width" />
 	<meta name="google-site-verification" content="ku1rolTmITGzkhkMlaY9qZjNN31vRHyZY1aRORX8Kfk" />
-	{# <title>Code0 (Code Zero) - {% block page_title %}Home{% endblock page_title %} | David Tjokroaminoto, Web developer in Melbourne, Australia</title> #}
-	<meta name="description" content=" Website Diskon No.1 di Kota Medan!">
+	<title>Kiasu ME - your number one stop for all discounts, bargains and sales happening now in Singapore!</title>
+	<meta name="description" content="Kiasu ME - your number one stop for all discounts, bargains and sales happening now in Singapore!">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/foundicons.css">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/foundation.css">
@@ -19,16 +19,16 @@
 </head>
 <body>
 	<div class="row">
-		<div class="large-6 columns">
+		<div class="large-8 columns">
 			<a href="/" id="website_title">
-				<h2>KIASU<span>MAX</span></h2><h6 class="subheader"> got discount bo?</h6>
+				<h2><span>KIASU</span>ME</h2><h6 class="subheader"> got discount bo?</h6>
 			</a>
 		</div>
-		<div class="large-9 columns" id="login_navigation">
+		<div class="large-8 columns" id="login_navigation">
 			{% if user.is_authenticated %}
 				<a href="/logout/" class="button small secondary right">Logout</a>
-				<a href="" class="button small right">Hi, {{ user.first_name }} !</a>
-				<a id="new_promotion" href="/promotion/new" class="button small right">post a deal</a>
+				<a href="/member/cpanel/" class="button small right">Hello <i>{{ user.username }}</i> !</a>
+				<a id="new_deal" href="/deal/new" class="button small right">post a deal</a>
 			{% else %}
 				<a href="/login/" class="button small secondary right">Login</a>
 				<a href="/register/" class="button small right">Register</a>
@@ -46,23 +46,36 @@
 		{% block master_override_block %}
 		<div id="content" class="large-11 columns">
 			{% block content_block %}
-				{% include "common/promotion_list.html" %}
+				{% include "common/deal_list.html" %}
 			{% endblock content_block %}
 		</div>
-		<div id="sidebar" class="large-5 columns">
+		<div id="sidebar" class="large-5 columns hide-for-touch">
 			{% block sidebar_block %}
 				{% include "common/hot_sidebar.html" %}
 			{% endblock sidebar_block %}
+			{% block social_network %}
+				<div class="social_sidebar">
+				<h5>Follow Us</h5>
+				<div class="fb-like-box_wrapper">
+				<div class="fb-like-box" data-href="http://www.facebook.com/KiasuMe" data-width="255" data-header="false" data-height="290" data-show-faces="true" data-stream="false" data-border-color="#ffffff" data-header="true"></div>
+				</div>
+				<a href="https://twitter.com/KiasuMe" class="twitter-follow-button" data-show-count="true">Follow @KiasuMe</a>
+			{% endblock social_network %}
 		</div>
 		{% endblock master_override_block %}
 	</div>
+	<div id="fb-root"></div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="{{ STATIC_URL }}js/jquery.cookie.js" type="text/javascript"></script>
-	<script src="{{ STATIC_URL }}js/foundation.min.js" type="text/javascript"></script>
+	<script>
+	document.write('<script src={{ STATIC_URL }}js/vendor/'+ ('__proto__' in {} ? 'zepto' : 'jquery')+ '.js><\/script>');
+	</script>
+	<script src="{{ STATIC_URL }}js/foundation/foundation.min.js" type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}js/foundation/foundation.topbar.js"type="text/javascript"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/layout.js"></script>
 	{% block javascript %}
 	{# CUSTOM JAVASCRIPT FROM VIEW #}
-	<script type="text/javascript" src="{{ STATIC_URL }}js/promotion/index_view.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/deal/index_view.js"></script>
 	{% endblock javascript %}
 </body>
 </html>

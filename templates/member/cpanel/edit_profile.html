@@ -1,0 +1,35 @@
+{% extends "member/cpanel/index.html" %}
+{% block cpanel_profile_block %}
+<form class="member_edit_profile" action="/member/cpanel/edit" method="POST">
+{% if form.errors %}
+	<fieldset class="row error_wrapper">
+		<legend>Errors</legend>
+		<div class="large-16 columns">
+			{{ form.errors }}
+		</div>
+	</fieldset>
+{% endif %}
+<fieldset>
+	<legend>Personal Info</legend>
+	{{ form.first_name.label_tag }}{{ form.first_name.errors }}{{ form.first_name }}
+	{{ form.middle_name.label_tag }}{{ form.middle_name.errors }}{{ form.middle_name }}
+	{{ form.last_name.label_tag }}{{ form.last_name.errors }}{{ form.last_name }}
+</fieldset>
+<fieldset>
+	<legend>Address</legend>
+	{{ form.address.label_tag }}{{ form.address.errors }}{{ form.address }}
+	{{ form.website.label_tag }}{{ form.website.errors }}{{ form.website }}
+
+</fieldset>
+
+<fieldset>
+	<legend>Contact</legend>
+	{{ form.landline_1.label_tag }}{{ form.landline_1.errors }}{{ form.landline_1 }}
+	{{ form.landline_2.label_tag }}{{ form.landline_2.errors }}{{ form.landline_2 }}
+	{{ form.fax.label_tag }}{{ form.fax.errors }}{{ form.fax }}
+	{{ form.mobile.label_tag }}{{ form.mobile.errors }}{{ form.mobile }}	
+</fieldset>
+{% csrf_token %}
+<input type="submit" value="SAVE CHANGES" class="button small">
+</form>
+{% endblock cpanel_profile_block %}

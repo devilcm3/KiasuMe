@@ -1,0 +1,18 @@
+{% extends "common/layout.html" %}
+{% block master_override_block %}
+<div class="row logging_wrapper">
+<div class="large-6 columns large-centered">
+	<fieldset>
+		<h6>
+		Member Registration Success!<br><br>
+		One last thing to do, we have sent you an email to confirm your account.<br><br>
+		All you have to do is click the link inside the email and you can start posting deals.<br> HOORAH! :)
+		</h6>
+	</fieldset>
+</div>
+</div>
+{% endblock master_override_block %}
+{% block javascript %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/form.js"></script>
+{% endblock javascript %}

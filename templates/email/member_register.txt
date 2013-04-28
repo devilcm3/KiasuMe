@@ -1,0 +1,4 @@
+Hello {{ username }} !
+To confirm your membership in KIASU.ME, please copy the url below and paste it on your browser :
+
+http://localhost:8000/member/confirm/{{ code }}

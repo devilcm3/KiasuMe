@@ -11,5 +11,9 @@ if  LOCALSETTINGS:
 	    os.path.join(PROJECT_ROOT,'static/'),
 	)
 else:
-	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	ALLOWED_HOSTS 	= ['kiasu.me','www.kiasu.me']
+	MEDIA_ROOT 		= '/home/devilcm3/webapps/kiasume_cdn/media/'
+	MEDIA_URL  		= '/files/media/'
+	STATIC_URL 		= '/files/static/'
+	# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'

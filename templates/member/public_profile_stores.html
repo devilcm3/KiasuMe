@@ -1,0 +1,27 @@
+{% extends "member/public_profile.html" %}
+{% block public_profile_block %}
+{% if stores %}
+	{% for store in stores %}
+	<table class="member_store_wrapper">
+		<tr>
+			<td colspan='2'><h5>{{ store.name }}</h5></td>
+		</tr>
+		<tr>
+			<td>Vote</td>
+			<td class="vote"><h5>{{ deal.total_vote | floatformat:0 }}<i class="social foundicon-thumb-up"></i><i class="social foundicon-thumb-down"></i></h5></td>
+		</tr>
+		<tr>
+			<td>Valid</td>
+			<td>{{ deal.date_started }} - {{ deal.date_ended }}</td>
+		</tr>
+		<tr>
+			<td>Category</td>
+			<td><a href="/deal/{{ deal.category_pk.id }}/{{ deal.category_pk }}">{{ deal.category_pk }}</a> - 
+							<a href="/deal/{{ deal.category_pk.id }}/{{ deal.category_pk.name }}/{{ deal.subcategory_pk.id }}/{{ deal.subcategory_pk.name }}">{{ deal.subcategory_pk.name }}</a></td>
+		</tr>
+	</table>
+	{% endfor %}
+{% else %}
+	<h6>Oops, it seems that the member doesn't have any store listed</h6>
+{% endif %}
+{% endblock public_profile_block %}

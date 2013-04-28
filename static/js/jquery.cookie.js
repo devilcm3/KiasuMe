@@ -81,7 +81,7 @@
     return result;
   };
 
-  config.defaults = {expires: 365};
+  config.defaults = {expires: 365, path: '/'};
 
   $.removeCookie = function (key, options) {
     if ($.cookie(key) !== undefined) {

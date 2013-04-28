@@ -11,14 +11,13 @@
 				<legend>Login using account</legend>
 			<form method="post" action="/login/" class="wide">
 				{% csrf_token %}
-				{# <label for="id_username">username</label> #}
-				<input name="username" id="id_username" type="input" placeholder="username">
-
-				{# <label for="id_password">password</label> #}
-				<input name="password" id="id_password" type="password" placeholder="password">
+				<input name="username" id="id_username" type="input" placeholder="Username">
+				<input name="password" id="id_password" type="password" placeholder="Password">
 
 				<input type="submit" value="LOG ME IN" id="log_me_in">
 			</form>
+			<a href="/register" id="login_register_redirect">Don't have account? Register here</a><br><br>
+			<a href="/member/reset_password/" id="login_register_redirect" class="secondary">Forget Password?</a>
 			</fieldset>
 		</div>
 	</div>
