@@ -1,5 +1,5 @@
 # Django settings for project_dante project.
-import os,django,dj_database_url
+import os,django #,dj_database_url
 
 AWS_ACCESS_KEY_ID = "AKIAJB3JQ6PX7NFMSQQA"
 AWS_SECRET_ACCESS_KEY = "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"
@@ -40,7 +40,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['kiasu.me','www.kiasu.me']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -71,22 +71,22 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT      = '/home/devilcm3/webapps/kiasume_cdn/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = S3_URL + '/'
+MEDIA_URL       = '/files/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT     = ''
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = S3_URL + '/static/'
+STATIC_URL      = '/files/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     # Uncomment the next line to enable the admin:
     'grappelli',
     'django.contrib.admin',
