@@ -9,6 +9,13 @@
 			</fieldset>
 			<fieldset>
 				<legend>Login using account</legend>
+			{% if message %}
+				<div class="row error_wrapper">
+					<div class="large-16 columns">
+						<ul class="errorlist"><li>{{ message }}</li></ul>
+					</div>
+				</div>
+			{% endif %}
 			<form method="post" action="/login/" class="wide">
 				{% csrf_token %}
 				<input name="username" id="id_username" type="input" placeholder="Username">

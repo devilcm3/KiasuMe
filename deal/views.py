@@ -23,7 +23,7 @@ def hot_deals(category_id = None):
 
 
 def index(request, page_num = 1):
-	pages = Paginator(Deal.objects.filter(active=True).order_by('-date_created'), 10)
+	pages = Paginator(Deal.objects.filter(active=True).order_by('-date_created').prefetch_related('category_pk','member_pk','subcategory_pk'), 10)
 	if not page_num : page_num = 1
 
 	context = {
@@ -36,10 +36,10 @@ def index(request, page_num = 1):
 
 def view(request,deal_id):
 	try:
-		deal = Deal.objects.get(id=deal_id)
+		deal = Deal.objects.select_related().get(id=deal_id)
 		context = {
 		'deal':deal,
-		'hot_deals':hot_deals(deal.category_pk.id),
+		'hot_deals':hot_deals(deal.category_pk_id),
 		'nav':deal.category_pk.name
 		}
 		return render(request,'deal/view.html',context)
@@ -87,7 +87,7 @@ def create_new_deal(request):
 			form.save()
 			return redirect('/')
 	else:
-		subcategories = simplejson.dumps([{'name':o.name,'id':o.id,'category':o.category_pk.id} for o in Subcategory.objects.all()])
+		subcategories = simplejson.dumps([{'name':o.name,'id':o.id,'category':o.category_pk.id} for o in Subcategory.objects.all().select_related()])
 		exclude_list = ('active','promo_thumbnail','total_vote','member_pk','tag_pk')	
 		form_class = GetDealForm(exclude_list)
 		form = form_class()

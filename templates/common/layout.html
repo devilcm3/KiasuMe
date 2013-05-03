@@ -7,6 +7,7 @@
 	<meta name="google-site-verification" content="qkQpyc-l7OVcDJqi-dfNW6FHWADnGgRWIOX7lLDNXto" />
 	<title>Kiasu ME - your number one stop for all discounts, bargains and sales happening now in Singapore!</title>
 	<meta name="description" content="Kiasu ME - your number one stop for all discounts, bargains and sales happening now in Singapore!">
+	<link rel="icon" type="image/gif" href="{{ STATIC_URL }}images/favicon.png">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/foundicons.css">
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/foundation.css">
@@ -19,12 +20,12 @@
 </head>
 <body>
 	<div class="row">
-		<div class="large-8 columns">
+		<div class="large-16 columns">
 			<a href="/" id="website_title">
-				<h2><span>KIASU</span>ME</h2><h6 class="subheader"> got discount bo?</h6>
+				{# <h2><span>KIASU</span>ME</h2><h6 class="subheader"> got discount bo?</h6> #}
+				<img src="{{ STATIC_URL }}images/logo.png">
 			</a>
-		</div>
-		<div class="large-8 columns" id="login_navigation">
+		<div id="login_navigation" class="right">
 			{% if user.is_authenticated %}
 				<a href="/logout/" class="button small secondary right">Logout</a>
 				<a href="/member/cpanel/" class="button small right">Hello <i>{{ user.username }}</i> !</a>
@@ -35,6 +36,7 @@
 				<a href="{% url 'socialauth_begin' 'twitter' %}" class="button small right social_button" id="twitter_button">t</a>
 				<a href="{% url 'socialauth_begin' 'facebook' %}" class="button small right social_button" id="facebook_button">f</a>
 			{% endif %}
+		</div>
 		</div>
 	</div>
 	<div class="row">

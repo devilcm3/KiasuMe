@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
 	name 			= models.CharField(max_length=50)
-	category_pk 	= models.ForeignKey('Category')
+	category_pk 	= models.ForeignKey('Category', related_name='subcategories')
 	priority		= models.IntegerField(max_length=3, blank=True, null=True)
 
 	def __unicode__(self):
@@ -85,14 +85,15 @@ class Deal(models.Model):
 			img 	= Image.open(img_input)
 			img 	= img.convert("RGB")
 
-			img.thumbnail((1000,1000),Image.ANTIALIAS)
+			img.thumbnail((1600,1000),Image.ANTIALIAS)
 			temp = StringIO()
 			img.save(temp,'JPEG',quality=75)
 
-			img.thumbnail((320,240),Image.ANTIALIAS)
+			img.thumbnail((640,480),Image.ANTIALIAS)
 			temp2 = StringIO()
 			img.save(temp2,'JPEG',quality=75)
 
+			default_storage.delete(path)
 			default_storage.save(path,ContentFile(temp.getvalue()))
 			default_storage.save(self.promo_thumbnail,ContentFile(temp2.getvalue()))
 

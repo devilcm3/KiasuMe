@@ -12,8 +12,8 @@ def member_confirm_mail(mid, email, username, verification):
 	text_content = plaintext.render(ctx)
 	html_content = htmly.render(ctx)
 
-	subject 	= "KIASU.ME User Registration Confirmation"
-	from_email 	= "no-reply@KIASU.ME"
+	subject 	= "Kiasu ME User Registration Confirmation"
+	from_email 	= "no-reply@kiasu.me"
 	to_email 	= [email]
 
 	msg = EmailMultiAlternatives(subject, text_content, from_email, to_email)
@@ -28,8 +28,8 @@ def reset_password_mail(email, username, password):
 	text_content = plaintext.render(ctx)
 	html_content = htmly.render(ctx)
 
-	subject 	= "KIASU.ME Password Reset"
-	from_email 	= "no-reply@KIASU.ME"
+	subject 	= "Kiasu ME Password Reset"
+	from_email 	= "no-reply@kiasu.me"
 	to_email 	= [email]
 
 	msg = EmailMultiAlternatives(subject, text_content, from_email, to_email)

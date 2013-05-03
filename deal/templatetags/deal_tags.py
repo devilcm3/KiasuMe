@@ -7,6 +7,6 @@ def show_navigation_menu(**kwargs):
 	kwargs[kwargs.get('active')] = 'active'
 	# links = [{'name':'Home','url':'/',kwargs.get('Home',"-"):'active'}]
 	links = []
-	for cat in Category.objects.all().order_by('priority'):
-		links.append({'name':cat.name, 'id':cat.id, 'subcats':cat.subcategory_set.all(), kwargs.get(cat.name,"-"):'active'})
+	for cat in Category.objects.all().order_by('priority').prefetch_related('subcategories'):
+		links.append({'name':cat.name, 'id':cat.id, 'subcats':cat.subcategories.all(), kwargs.get(cat.name,"-"):'active'})
 	return {'links':links}

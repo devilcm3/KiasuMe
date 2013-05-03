@@ -20,21 +20,12 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'project_dante',                      # Or path to database file if using sqlite3.
+        'NAME': 'kiasume_db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'davidcokro_12',
-        'PASSWORD': '',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432',                      # Set to empty string for default.
-    },
-    'webfaction': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'project_dante',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'davidcokro_12',
-        'PASSWORD': '',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432',                      # Set to empty string for default.    
+        'USER': 'kiasu_db_admin',
+        'PASSWORD': 'iTcKaKYVs47zXq',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.    
     }
 }
 
@@ -67,7 +58,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = True
+USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -119,6 +110,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -154,7 +146,10 @@ INSTALLED_APPS = (
     'deal',
     'store',
     'django_cleanup',
+    'debug_toolbar',
 )
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
@@ -207,10 +202,9 @@ LOGGING = {
 
 # EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'SMTP.LIVE.COM'
-EMAIL_HOST_USER = 'NO-REPLY@KIASU.ME'
-EMAIL_HOST_PASSWORD = 'yUz8sf3XGmVNLQ'
-EMAIL_USE_TLS = True
+EMAIL_HOST = 'SMTP.WEBFACTION.COM'
+EMAIL_HOST_USER = 'kiasu_noreply'
+EMAIL_HOST_PASSWORD = 'WaaQFU28YfgVYa'
 
 try:
     from local_settings import *

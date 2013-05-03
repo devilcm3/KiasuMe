@@ -10,11 +10,11 @@
 </fieldset>
 <fieldset>
 	<legend>Register Form</legend>
-	<form class="member_edit_profile" action="/register/" method="POST">
-	{% if form.errors %}
+	<form class="member_edit_profile" action="/register/" method="POST" onsubmit="return registerValidation()">
+	{% if form.non_field_errors %}
 		<div class="row error_wrapper">
 			<div class="large-16 columns">
-				{{ form.errors }}
+				{{ form.non_field_errors }}
 			</div>
 		</div>
 	{% endif %}
@@ -41,4 +41,5 @@
 {% block javascript %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.placeholder.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/form.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/member/register.js"></script>
 {% endblock javascript %}

@@ -6,7 +6,8 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-
+from deal.models import *
+from datetime import date,time,datetime
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):
@@ -14,3 +15,12 @@ class SimpleTest(TestCase):
         Tests that 1 + 1 always equals 2.
         """
         self.assertEqual(1 + 1, 2)
+
+class DealTest(TestCase):
+	def deal_index_speed(self):
+		for i in xrange(1,10000):
+			today = [
+				datetime.combine(date.today(),time.min),
+				datetime.combine(date.today(),time.max)
+			]
+			Deal.objects.filter(date_created__range=(today[0],today[1])).filter(active=True, total_vote__gt = 0).only('id','title').order_by('-total_vote')[:5]

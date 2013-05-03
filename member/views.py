@@ -42,9 +42,9 @@ def login(request):
 				success = "Login successful!"
 				return render(request,'common/success.html',{"success":success})
 			else:
-				message = "you've been banned! oops!"
+				message = "Have you activated your account yet?"
 		else:
-			message = "wrong password perhaps?"
+			message = "Login Failed, check username and password"
 	return render(request,'member/login.html',{'message':message})
 
 def register(request):
