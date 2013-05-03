@@ -1102,6 +1102,7 @@ a {
 
 /* Default paragraph styles */
 p {
+  word-wrap: break-word;
   font-family: inherit;
   font-weight: normal;
   font-size: 0.90em;

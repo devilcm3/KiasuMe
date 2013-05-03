@@ -5,6 +5,9 @@
 		<div class="large-16 columns">
 			<h5 class="deal_title">
 				{{ deal.title }}
+				{% if deal.link %}
+					<a href="{{ deal.link }}"><small>[link]</small></a>
+				{% endif %}
 			</h5>
 		</div>
 	</div>
@@ -34,8 +37,8 @@
 						{% endif %}
 						<p><b>Valid</b><br>
 							{{ deal.date_started | date:"l, d F" }}
-							{% if deal.date_started != deal.date_ended %}
-							- <br>
+							{% if deal.date_started != deal.date_ended %}<br>
+							<b>Expired After</b><br>
 							{{ deal.date_ended | date:"l, d F" }}
 							{% endif %}
 						</p>	

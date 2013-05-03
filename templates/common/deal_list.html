@@ -4,6 +4,9 @@
 		<div class="large-16 columns">
 			<h5 class="deal_title">
 				<a href="/deal/view/{{ deal.id }}/{{ deal.slug }}">{{ deal.title }}</a>
+				{% if deal.link %}
+					<a href="{{ deal.link }}"><small>[link]</small></a>
+				{% endif %}
 			</h5>
 		</div>
 	</div>

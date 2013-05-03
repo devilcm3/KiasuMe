@@ -3,12 +3,13 @@ import uuid
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.utils import simplejson
 from django.core.exceptions import PermissionDenied
 from member.models import Profile, RegEmail
 from member.forms import EditProfileForm, NewProfileForm, ChangePasswordForm, ResetPasswordForm
 from deal.forms import GetDealForm
 from store.models import Store
-from deal.models import Deal
+from deal.models import Deal, Subcategory
 from member.utils import reset_password_mail
 
 def reset_password(request):
@@ -142,6 +143,7 @@ def cpanel_view_deals(request):
 
 @login_required
 def cpanel_edit_deal(request,did):
+	subcategories = simplejson.dumps([{'name':o.name,'id':o.id,'category':o.category_pk.id} for o in Subcategory.objects.all().select_related()])
 	try:
 		deal = Deal.objects.get(id=did, member_pk=request.user.id)
 	except:
@@ -156,7 +158,7 @@ def cpanel_edit_deal(request,did):
 		form = GetDealForm(instance=deal, exclude_list=('date_created','date_modified'))
 		form = form()
 
-	return render(request,'member/cpanel/edit_deal.html',{ 'form':form, 'deal':deal })
+	return render(request,'member/cpanel/edit_deal.html',{ 'form':form, 'deal':deal, 'subcategories':subcategories})
 
 @login_required
 def cpanel_delete_deal(request,did):

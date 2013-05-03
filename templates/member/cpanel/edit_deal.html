@@ -6,7 +6,7 @@
 <div class="new_deal_wrapper">
 	<div class="row">
 		<div class="large-16 columns">
-		<form class="member_edit_deal deal_form" action="/member/cpanel/deals/edit/{{ deal.id }}/" method="POST" enctype="multipart/form-data">
+		<form class="member_edit_deal deal_form" action="/member/cpanel/deals/edit/{{ deal.id }}/" method="POST" enctype="multipart/form-data" onsubmit="return dealValidation()">
 			{% if form.non_field_errors %}
 			<fieldset class="row error_wrapper">
 				<legend>Errors</legend>
@@ -16,33 +16,52 @@
 			</fieldset>
 			{% endif %}
 			<fieldset class="main_info row">
-					<legend>Main Info <small>( Title max chars : 100 )</small></legend>
-					<div class="large-16 columns">
-						{{ form.title.label_tag }}{{ form.title.errors }}{{ form.title }}
-					</div>
-					<div class="large-16 columns">
-						{{ form.content.label_tag }}{{ form.content.errors }}{{ form.content }}
-					</div>
+				<legend>Main Info</legend>
+				<div class="large-16 columns">
+					<span data-tooltip class="has-tip tip-right" title="Max Characters : 100">
+					{{ form.title.label_tag }}{{ form.title.errors }}{{ form.title }}
+					</span>
+				</div>
+				<div class="large-16 columns">
+					<span data-tooltip class="has-tip tip-right" title="Link to deal website">
+					{{ form.link.label_tag }}{{ form.link.errors }}{{ form.link }}
+					</span>
+				</div>
+				<div class="large-16 columns">
+					<span data-tooltip class="has-tip tip-right" title="Max Characters : 2000">
+					{{ form.content.label_tag }}{{ form.content.errors }}{{ form.content }}
+					</span>
+				</div>
 			</fieldset>
 			<fieldset class="dates row">
-					<legend>Date</legend>
-					<div class="large-7 columns">
-					<div class="row">
-					<div class="large-16 columns">					
-					{{ form.date_started.label_tag }}{{ form.date_started.errors }}{{ form.date_started }}
-					</div>
-					</div>
-					<div class="row">
-					<div class="large-16 columns">
-					{{ form.date_ended.label_tag }}{{ form.date_ended.errors }}{{ form.date_ended }}
-					</div>
-					</div>
+				<legend>Date</legend>
+				<div class="large-7 columns">
+				<div class="row">
+				<div class="large-16 columns">
+				<span data-tooltip class="has-tip tip-right" title="starting from today">					
+				{{ form.date_started.label_tag }}{{ form.date_started.errors }}{{ form.date_started }}
+				</span>
+				</div>
+				</div>
+				<div class="row">
+				<div class="large-16 columns">
+				<span data-tooltip class="has-tip tip-right" title="must be same as or later than 'Date Started'">
+				{{ form.date_ended.label_tag }}{{ form.date_ended.errors }}{{ form.date_ended }}
+				</div>
+				</div>
 			</fieldset>
 			<fieldset class="files row">
-				<legend>Images and Files <small>( Size Limit : 2MB )</small></legend>
+				<legend>Images and Files</legend>
 				<div class="large-14 columns">
-				{{ form.promo_image.label_tag }}{{ form.promo_image }}
-				{{ form.promo_file.label_tag }}{{ form.promo_file }}
+				{{ form.promo_image.label_tag }}
+				<span data-tooltip class="has-tip tip-right" title="max size : 2MB">
+				{{ form.promo_image }}
+				</span>
+
+				{{ form.promo_file.label_tag }}
+				<span data-tooltip class="has-tip tip-right" title="max size : 2MB">
+				{{ form.promo_file }}
+				</span>
 				</div>
 			</fieldset>
 			<fieldset class="category row">
@@ -51,16 +70,25 @@
 					<div class="row">				
 						<div class="large-16 columns">
 						<label for="id_category_pk">Category</label>
+						<span data-tooltip class="has-tip tip-right" title="must be selected">
 						{{ form.category_pk }}
 						{{ form.category_pk.errors }}
 						</div>
+						</span>
 					</div>
 					<div class="row">
-						<div class="large-16 columns">
+						<div class="large-16 columns subcategory_row">
 						<label for="id_subcategory_pk">Sub Category</label>
-						{{ form.subcategory_pk }}
+						<span data-tooltip class="has-tip tip-right" title="optional">
+						<p class="subcategories" style="display:none">{{ subcategories }}</p>
+						</span>
 						</div>
 					</div>
+				</div>
+			</fieldset>
+			<fieldset class="row js_error">
+				<div class="large-16 columns">
+					<ul class="errorlist"><li>You have errors, please check input boxes hightlighted with orange above</li></ul>
 				</div>
 			</fieldset>
 			{% csrf_token %}

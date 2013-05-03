@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$(document).foundation();
-	$('.search_box > a').click(function(){
+	$('.search_box a').click(function(){
 		$('.search_box > form').submit();
 	});
 });

@@ -39,7 +39,7 @@ class Deal(models.Model):
 	def get_file_upload_path(self,*args):
 		return "%s/%s/%s%s" %("media/deal", date.today().strftime("%Y/%m/%d"), uuid4(), '.jpeg')
 
-	title			= models.CharField(max_length=200, blank = False)
+	title			= models.CharField(max_length=150, blank = False)
 	slug			= models.SlugField(max_length=200, blank = True)
 	link 			= models.URLField(max_length=200, blank = True)
 	content 		= models.TextField(blank = False)

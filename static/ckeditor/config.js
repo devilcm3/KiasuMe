@@ -36,4 +36,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+	config.extraPlugins = 'wordcount';
+	config.wordcount = {
+	    showCharCount: true
+	};
 };

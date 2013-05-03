@@ -54,10 +54,10 @@ def search(request, query):
 
 def category(request, category_id, category_name, subcategory_id = None, subcategory_name = None, page_num = 1):
 	if subcategory_id and subcategory_name:
-		pages = Paginator(Deal.objects.filter(subcategory_pk=subcategory_id).filter(active=True).order_by('-date_created'),10)
+		pages = Paginator(Deal.objects.filter(subcategory_pk=subcategory_id).filter(active=True).order_by('-date_created').prefetch_related('category_pk','member_pk','subcategory_pk'),10)
 		pagination_url = '/deal/%s/%s/%s/%s/' %(category_id, category_name, subcategory_id, subcategory_name)
 	else:
-		pages = Paginator(Deal.objects.filter(category_pk=category_id).filter(active=True).order_by('-date_created'),10)
+		pages = Paginator(Deal.objects.filter(category_pk=category_id).filter(active=True).order_by('-date_created').prefetch_related('category_pk','member_pk','subcategory_pk'),10)
 		pagination_url = '/deal/%s/%s/' %(category_id, category_name)
 
 	if not page_num: page_num = 1
@@ -78,6 +78,7 @@ def vote(request):
 
 @login_required
 def create_new_deal(request):
+	subcategories = simplejson.dumps([{'name':o.name,'id':o.id,'category':o.category_pk.id} for o in Subcategory.objects.all().select_related()])
 	if request.method == 'POST':
 		post_values = request.POST.copy()
 		post_values['member_pk'] = request.user.id
@@ -87,7 +88,6 @@ def create_new_deal(request):
 			form.save()
 			return redirect('/')
 	else:
-		subcategories = simplejson.dumps([{'name':o.name,'id':o.id,'category':o.category_pk.id} for o in Subcategory.objects.all().select_related()])
 		exclude_list = ('active','promo_thumbnail','total_vote','member_pk','tag_pk')	
 		form_class = GetDealForm(exclude_list)
 		form = form_class()

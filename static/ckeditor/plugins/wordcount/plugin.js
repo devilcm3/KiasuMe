@@ -2,7 +2,8 @@
  * @license Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
- 
+ var gCharCount;
+
 CKEDITOR.plugins.add('wordcount', {
     lang: ['de', 'en', 'fr', 'pl'],
     init: function (editor) {
@@ -18,7 +19,7 @@ CKEDITOR.plugins.add('wordcount', {
         // Default Config
         var defaultConfig = {
             showWordCount: true,
-            showCharCount: false,
+            showCharCount: true,
             charLimit: 'unlimited',
             wordLimit: 'unlimited'
         };
@@ -85,6 +86,7 @@ CKEDITOR.plugins.add('wordcount', {
 
                 if (config.showCharCount) {
 					charCount = strip(text).trim().length;
+                    gCharCount = charCount;
                 }
             }
             var html = format.replace('%wordCount%', wordCount).replace('%charCount%', charCount);
