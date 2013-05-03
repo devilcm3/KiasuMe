@@ -15,7 +15,7 @@
 			<td>{{ deal.date_created }} / <br>{{ deal.date_modified }}</td>
 			<td>
 				<a href="/member/cpanel/deals/edit/{{ deal.id }}"><i class="general foundicon-edit"></i></a>
-				<a href="/member/cpanel/deals/delete/{{ deal.id }}"><i class="general foundicon-remove"></i></a>
+				<a href="#" link-href="/member/cpanel/deals/delete/{{ deal.id }}" class="delete_deal"><i class="general foundicon-remove"></i></a>
 			</td>
 		</tr>
 	{% endfor %}
@@ -24,3 +24,6 @@
 	<h6>Oops, you still haven't posted any deals yet</h6>
 {% endif %}
 {% endblock cpanel_profile_block %}
+{% block javascript %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/member/cpanel.js"></script>
+{% endblock javascript %}
