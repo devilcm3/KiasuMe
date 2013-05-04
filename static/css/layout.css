@@ -317,3 +317,23 @@ div.register_password_form{
 .fb_edge_comment_widget {
   display: none !important;
 }
+
+.about_us_wrapper ul{
+	font-size: 0.9em;
+}
+
+/*/////////////////////////////// FOOTER ////////////////////////////////////*/
+.footer.row > div{
+	text-align: center;
+}
+.footer.row ul{
+	margin-top: 2em;
+	padding-top: 1em;
+	border-top: 2px solid #1D84E6;
+	list-style-type: none;
+}
+.footer.row li{
+	font-size: 0.8em;
+	margin: 0 0.5em;
+	display: inline-block;
+}

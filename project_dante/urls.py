@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
+from django.views.generic import TemplateView
 from deal.sitemaps import DealSitemap
 
 # Uncomment the next two lines to enable the admin:
@@ -26,6 +27,10 @@ urlpatterns = patterns('',
     url(r'^member/',include('member.urls',namespace="member")),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^manage/',include(admin.site.urls)),
+    url(r'^about_us/',TemplateView.as_view(template_name='common/about_us.html')),
+    url(r'^disclaimer/',TemplateView.as_view(template_name='common/disclaimer.html')),
+    url(r'^privacy/',TemplateView.as_view(template_name='common/privacy.html')),
+    url(r'^support/',TemplateView.as_view(template_name='common/support.html')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 
     # Uncomment the admin/doc line below to enable admin documentation:

@@ -64,11 +64,11 @@
 <div class="pagination-centered">
 <ul class="pagination">
 	{% if deals.has_previous %}
-	<li class="arrow"><a href="{{ pagination_url }}{{ deals.previous_page_number }}">PREVIOUS</a></li>
+	<li class="arrow"><a class="button small" href="{{ pagination_url }}{{ deals.previous_page_number }}">PREVIOUS</a></li>
 	{% endif %}
 
 	{% if deals.has_next %}
-	<li class="arrow"><a href="{{ pagination_url }}{{ deals.next_page_number }}">NEXT</a></li>
+	<li class="arrow"><a class="button small" href="{{ pagination_url }}{{ deals.next_page_number }}">NEXT</a></li>
 	{% endif %}
 </ul>
 </div>

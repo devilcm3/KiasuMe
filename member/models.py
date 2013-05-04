@@ -7,8 +7,8 @@ from member.utils import *
 
 class Profile(AbstractUser):
 	middle_name	= models.CharField(max_length = 100, blank = True)
-	address 	= models.CharField(max_length = 200)
-	landline_1 	= models.CharField(max_length = 30)
+	address 	= models.CharField(max_length = 200,blank = True)
+	landline_1 	= models.CharField(max_length = 30,blank = True)
 	landline_2 	= models.CharField(max_length = 30,blank = True)
 	fax 		= models.CharField(max_length = 30,blank = True)
 	mobile 		= models.CharField(max_length = 30,blank = True)
