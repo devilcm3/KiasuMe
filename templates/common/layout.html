@@ -19,6 +19,11 @@
 	<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
+	<div class="full_image">
+		<div>
+			<img src="">
+		</div>
+	</div>
 	<div class="row">
 		<div class="large-16 columns">
 			<a href="/" id="website_title">
@@ -46,17 +51,17 @@
 	</div>
 	<div class="row">
 		{% block master_override_block %}
-		<div id="content" class="large-11 columns">
+		<div id="content" class="large-11 small-16 columns">
 			{% block content_block %}
 				{% include "common/deal_list.html" %}
 			{% endblock content_block %}
 		</div>
-		<div id="sidebar" class="large-5 columns hide-for-touch">
+		<div id="sidebar" class="large-5 columns hide-for-small">
 			{% block sidebar_block %}
 				{% include "common/hot_sidebar.html" %}
 			{% endblock sidebar_block %}
 			{% block social_network %}
-				<div class="social_sidebar">
+				<div class="social_sidebar hide-for-touch">
 					<h5>Follow Us</h5>
 					<div class="fb-like-box_wrapper">
 						<div class="fb-like-box" data-href="http://www.facebook.com/KiasuMe" data-width="255" data-header="false" data-height="290" data-show-faces="true" data-stream="false" data-border-	color="#ffffff" data-header="true"></div>

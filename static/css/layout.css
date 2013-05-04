@@ -3,6 +3,30 @@
 		display: none !important;
 	}
 }
+.full_image{
+	left: 0;
+	right: 0;
+    background: none repeat scroll 0 0 rgba(3, 3, 3, 0.84);
+    display: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+}
+.full_image > div{
+	position: relative;
+}
+.full_image img {
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+    border: 1px solid white;
+    padding: 0.3em;
+    max-width: 1120px;
+}
+
 input.error_field, div.error_field, select.error_field{
 	border: 2px solid #FF7306 !important;
 }
@@ -61,10 +85,12 @@ div.row.error_wrapper{
 	color: #ff7306;
 }
 .button.small.social_button{
+	border: 0 none;
     font-family: Arial;
-    font-size: 1.7em;
-    padding: 0.02em 0.43em;
+    font-size: 1.6em;
     margin: 0;
+    padding: 0.12em 0.56em;
+    -webkit-text-size-adjust: none;
 }
 #facebook_button{
     background-color:  #3B5999;
@@ -323,6 +349,9 @@ div.register_password_form{
 }
 
 /*/////////////////////////////// FOOTER ////////////////////////////////////*/
+.footer.row{
+	z-index: 10;
+}
 .footer.row > div{
 	text-align: center;
 }

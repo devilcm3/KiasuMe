@@ -3,6 +3,30 @@ $(document).ready(function(){
 	$('.search_box a').click(function(){
 		$('.search_box > form').submit();
 	});
+
+
+	$('.full_image').height($('html').height()+200);
+	$('.full_image img').load(function(){
+		var scr_h = window.innerHeight;
+		var img_h = $(this).height();
+		var diff = (scr_h - img_h) / 2;
+		$('.full_image > div').css('padding-top',diff);
+		$(this).css('opacity',1);
+	});
+
+	$('.deal_thumbnail').click(function(){
+		$('.full_image img').attr('src',$(this).attr('full_src'));
+		$('.full_image').css('display','block');
+		$('.full_image > div').css('top',$(document).scrollTop());
+		$('.full_image img').css('opacity',0);
+
+		// $('.full_image').css('top',top);
+	});
+
+	$('.full_image').click(function(){
+		$(this).css('display','none');
+		$(this).children('img').attr('src','');
+	});
 });
 
 //INPUT CRSF

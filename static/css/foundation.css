@@ -2697,7 +2697,6 @@ form.custom {
       visibility: visible; }
     .top-bar-section .has-dropdown .dropdown li.has-dropdown > a:after {
       border: none;
-      content: "\00bb";
       margin-top: -7px;
       right: 5px; }
     .top-bar-section .dropdown {

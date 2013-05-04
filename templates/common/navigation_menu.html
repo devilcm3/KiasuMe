@@ -11,12 +11,29 @@
 	<li class="{{ link.active }} has-dropdown">
 		<a href="/deal/{{ link.id }}/{{ link.name }}">{{ link.name }}</a>
 		<ul class="dropdown">
+		<li><a href="/deal/{{ link.id }}/{{ link.name }}" class="show-for-touch">{{ link.name }} - ALL</a></li>
 		{% for subcat in link.subcats %}
 		<li><a href="/deal/{{ link.id }}/{{ link.name }}/{{ subcat.id }}/{{ subcat.name }}">{{ subcat.name }}</a></li>
 		{% endfor %}
 		</ul>
 	</li>
 {% endfor %}
+	<li class="{{ link.active }} has-dropdown">
+		<a href="#"> >> </a>
+		<ul class="dropdown">
+		{% for link in more_links %}
+			<li class="{{ link.active }} has-dropdown">
+				<a href="/deal/{{ link.id }}/{{ link.name }}">{{ link.name }}</a>
+				<ul class="dropdown">
+				<li><a href="/deal/{{ link.id }}/{{ link.name }}" class="show-for-touch">{{ link.name }} - ALL</a></li>
+				{% for subcat in link.subcats %}
+				<li><a href="/deal/{{ link.id }}/{{ link.name }}/{{ subcat.id }}/{{ subcat.name }}">{{ subcat.name }}</a></li>
+				{% endfor %}
+				</ul>
+			</li>
+		{% endfor %}
+		</ul>
+	</li>
 </ul>
 <ul class="right">
 	<li class="search_box">
