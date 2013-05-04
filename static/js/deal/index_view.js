@@ -20,7 +20,6 @@ $(document).ready(function(){
 					color_points(vote_points);
 				},
 				error: function(){
-					console.log($(this));
 					$('a.vote_login_prompt').hide();
 					if(elem.siblings('a.vote_login_prompt').length == 0){
 						elem.parent('div').append('<a href="/login/" class="vote_login_prompt">login here to vote</a>');
@@ -35,7 +34,6 @@ $(document).ready(function(){
 	$('.thumbs_wrapper').each(function(){
 		var p_id = $(this).attr('promo_id');
 		var cookie = $.cookie('vote_'+p_id);
-		console.log(cookie);
 		var active, inactive;
 		if(cookie == 1){
 			active = 'a.like_deal';

@@ -19,12 +19,11 @@
 	position: relative;
 }
 .full_image img {
-	width: 80%;
 	display: block;
 	margin: 0 auto;
     border: 1px solid white;
     padding: 0.3em;
-    max-width: 1120px;
+    max-width: 70%;
 }
 
 input.error_field, div.error_field, select.error_field{
