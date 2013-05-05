@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.views.generic import TemplateView
-from deal.sitemaps import DealSitemap
+from deal.sitemaps import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -13,7 +13,9 @@ if not model_cache.loaded:
 admin.autodiscover()
 
 sitemaps = {
-    'deal': DealSitemap
+    'deal': DealSitemap,
+    'category':DealCategorySitemap,
+    'subcategory':DealSubcategorySitemap
 }
 
 urlpatterns = patterns('',
@@ -31,7 +33,7 @@ urlpatterns = patterns('',
     url(r'^disclaimer/',TemplateView.as_view(template_name='common/disclaimer.html')),
     url(r'^privacy/',TemplateView.as_view(template_name='common/privacy.html')),
     url(r'^support/',TemplateView.as_view(template_name='common/support.html')),
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps,'template_name': 'common/sitemap.html'}),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -12,14 +12,10 @@ from django.core.paginator import Paginator
 # import os
 
 def hot_deals(category_id = None):
-	today = [
-		datetime.combine(date.today(),time.min),
-		datetime.combine(date.today(),time.max)
-	]
 	if category_id:
-		return Deal.objects.filter(date_created__range=(today[0],today[1])).filter(category_pk=category_id, active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__gt=datetime.combine(date.today(),time.min), category_pk=category_id, active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
 	else:
-		return Deal.objects.filter(date_created__range=(today[0],today[1])).filter(active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__gt=datetime.combine(date.today(),time.min), active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
 
 
 def index(request, page_num = 1):
