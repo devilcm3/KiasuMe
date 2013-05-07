@@ -1,0 +1,35 @@
+{% extends "common/layout.html" %}
+{% block master_override_block %}
+	<div class="row logging_wrapper">
+		<div class="large-6 columns large-centered">
+			<fieldset>
+				<legend>Error</legend>
+				<h5>OOPS...<br> It seems that there has been some error, try again?</h5>
+			</fieldset>
+			<fieldset class="social_login_wrapper">
+				<legend>Social Network</legend>
+				<a href="{% url 'socialauth_begin' 'facebook' %}" ><img src="{{ STATIC_URL }}images/facebook_button.png"></a>
+				<a href="{% url 'socialauth_begin' 'twitter' %}" ><img src="{{ STATIC_URL }}images/twitter_button.png"></a>
+			</fieldset>
+			<fieldset>
+				<legend>Login using account</legend>
+			{% if message %}
+				<div class="row error_wrapper">
+					<div class="large-16 columns">
+						<ul class="errorlist"><li>{{ message }}</li></ul>
+					</div>
+				</div>
+			{% endif %}
+			<form method="post" action="/login/" class="wide">
+				{% csrf_token %}
+				<input name="username" id="id_username" type="input" placeholder="Username">
+				<input name="password" id="id_password" type="password" placeholder="Password">
+
+				<input type="submit" value="LOG ME IN" id="log_me_in">
+			</form>
+			<a href="/register" id="login_register_redirect">Don't have account? Register here</a><br><br>
+			<a href="/member/reset_password/" id="login_register_redirect" class="secondary">Forget Password?</a>
+			</fieldset>
+		</div>
+	</div>
+{% endblock master_override_block %}
