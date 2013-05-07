@@ -110,10 +110,15 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'social_auth.middleware.SocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS' : False
+}
 
 ROOT_URLCONF = 'project_dante.urls'
 
@@ -164,8 +169,10 @@ TWITTER_CONSUMER_SECRET = 'IIHqHtRp61PJEZiJGLuLzaLRunmURKM1g0DjTBIgeA'
 TWITTER_EXTENDED_PERMISSIONS = ['email']
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
+SOCIAL_AUTH_BACKEND_ERROR_URL = '/login-error/'
 SOCIAL_AUTH_USER_MODEL = 'member.Profile'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'social_profile'
+
 
 SOUTH_MIGRATION_MODULES = {
     'member':'ignore',

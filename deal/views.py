@@ -13,9 +13,9 @@ from django.core.paginator import Paginator
 
 def hot_deals(category_id = None):
 	if category_id:
-		return Deal.objects.filter(date_created__gt=datetime.combine(date.today(),time.min), category_pk=category_id, active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__gte = date.today(), category_pk=category_id, active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
 	else:
-		return Deal.objects.filter(date_created__gt=datetime.combine(date.today(),time.min), active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__gte = date.today(), active=True, total_vote__gt = 0).values('id','title').order_by('-total_vote')[:5]
 
 
 def index(request, page_num = 1):

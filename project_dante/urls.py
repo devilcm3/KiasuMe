@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^register/$','member.views.register',name="register"),
     url(r'^login/$','member.views.login',name="login"),
+    url(r'^login-error/$','member.views.login_error',name="login-error"),
     url(r'^logout/$','member.views.logout',name="logout"),
     url(r'',include('social_auth.urls')),
     url(r'^$','deal.views.index',name="home"),

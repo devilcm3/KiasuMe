@@ -168,3 +168,6 @@ def cpanel_delete_deal(request,did):
 		return redirect('/member/cpanel/deals')
 	except:
 		raise PermissionDenied
+
+def login_error(request):
+	return render(request,'member/login_error.html')
