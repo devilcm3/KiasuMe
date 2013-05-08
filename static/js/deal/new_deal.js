@@ -99,6 +99,7 @@ function categorize_subcategories(){
 	    if (subcats_array[i] != undefined){
 	        var tempStr = 
 	        '<select name="subcategory_pk" id="id_subcategory_pk" class="category_'+i+'" disabled style="display:none">' +
+	        '<option selected="selected" value="">---------</option>'+
 	        subcats_array[i] +
 	        '</select>';
 	        

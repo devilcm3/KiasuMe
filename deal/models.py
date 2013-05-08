@@ -72,6 +72,10 @@ class Deal(models.Model):
 		from django.utils.text import slugify
 		self.slug = slugify(self.title)
 
+		new = False
+		if self.id is None:
+			new = True
+
 		if(hasattr(self.promo_image,'file')):
 			self.promo_thumbnail = "%s/%s/%s%s" %("media/deal", date.today().strftime("%Y/%m/%d"), uuid4(), '.jpeg')
 			super(Deal,self).save(*args, **kwargs)
@@ -101,6 +105,13 @@ class Deal(models.Model):
 			temp2.close()
 		else:
 			super(Deal,self).save(*args, **kwargs)
+
+		if new:
+			from twitter import *
+			from project_dante import settings
+			t = Twitter(auth = OAuth(settings.KIASU_OAUTH_TOKEN, settings.KIASU_OAUTH_SECRET, settings.KIASU_CONSUMER_KEY, settings.KIASU_CONSUMER_SECRET))
+			status_msg = self.title[:95] +"#sg #discount" +" www.kiasu.me/deal/view/"+str(self.id)
+			t.statuses.update(status = status_msg)
 
 class DealRating(models.Model):
 	vote			= models.NullBooleanField(blank=True,default=None)

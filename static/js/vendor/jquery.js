@@ -7836,7 +7836,7 @@ jQuery.extend({
     jqXHR.success = jqXHR.done;
     jqXHR.error = jqXHR.fail;
 
-    // Remove hash character (#7531: and string deal)
+    // Remove hash character (#7531: and string promotion)
     // Add protocol if not provided (#5866: IE7 issue with protocol-less urls)
     // Handle falsy url in the settings object (#10093: consistency with old signature)
     // We also use the url parameter if available

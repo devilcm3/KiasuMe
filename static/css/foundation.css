@@ -130,7 +130,7 @@ select {
         display: table; }
       .row .row.collapse:after {
         clear: both; }
-
+        
 @media only screen {
   .row .column,
   .row .columns {
@@ -1182,7 +1182,7 @@ dl {
   font-size: 1em;
   line-height: 1.6;
   margin-bottom: 0.5em;
-  list-style-position: inside;
+  list-style-position: outside;
   font-family: inherit; }
 
 /* Unordered Lists */
@@ -1357,6 +1357,7 @@ blockquote p {
 
   .show-for-print {
     display: inherit !important; } }
+
 button, .button {
   border-style: solid;
   border-width: 2px;
@@ -1509,20 +1510,9 @@ button.button {
   button.button.large {
     padding-top: 1.03125em;
     padding-bottom: 1.03125em; }
-
-@media only screen {
-  .button {
-    .button:active {
-      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset; }
-    .button.radius {
-      -webkit-border-radius: 0px;
-      border-radius: 0px; }
-    .button.round {
-      -webkit-border-radius: 1000px;
-      border-radius: 1000px; } }
+    
 @media only screen and (min-width: 48em) {
-  .button {
+  button, .button {
     display: inline-block; } }
 /* Standard Forms */
 form {
@@ -2443,7 +2433,7 @@ form.custom {
   line-height: 35px;
   position: relative;
   border-bottom: 2px solid #1D84E6;
-  margin-bottom: 0.18em; }
+  margin-bottom: 1.875em; }
   .top-bar ul {
     margin-bottom: 0;
     list-style: none; }
@@ -2486,7 +2476,7 @@ form.custom {
       font-weight: bold;
       position: relative;
       display: block;
-      padding: 0 15px;
+      padding: 0 10px;
       height: 45px;
       line-height: 45px; }
     .top-bar .toggle-topbar.menu-icon {
@@ -2529,7 +2519,7 @@ form.custom {
   transition: left 300ms ease-out; }
   .top-bar-section ul {
     width: 100%;
-    height: auto;
+    height: auto !important;
     display: block;
     font-size: 18px;
     margin: 0; 
