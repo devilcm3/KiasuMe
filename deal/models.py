@@ -110,7 +110,7 @@ class Deal(models.Model):
 			from twitter import *
 			from project_dante import settings
 			t = Twitter(auth = OAuth(settings.KIASU_OAUTH_TOKEN, settings.KIASU_OAUTH_SECRET, settings.KIASU_CONSUMER_KEY, settings.KIASU_CONSUMER_SECRET))
-			status_msg = self.title[:95] +"#sg #discount" +" www.kiasu.me/deal/view/"+str(self.id)
+			status_msg = self.title[:95] +" #sg #discount" +" www.kiasu.me/deal/view/"+str(self.id)
 			t.statuses.update(status = status_msg)
 
 class DealRating(models.Model):
