@@ -11,6 +11,9 @@
 		<ul id="member_menu_list">
 			<li class="{{ menu_active.profile }}"><a href='/member/cpanel/'>PROFILE</a></li>
 			<li class="{{ menu_active.deals }}"><a href='/member/cpanel/deals/'>DEALS</a></li>
+			{% if user.is_staff %}
+			<li class="{{ menu_active.retweet_deals }}"><a href='/member/cpanel/retweet_deals'>RETWEET_DEALS</a></li>	
+			{% endif %}
 		</ul>
 	</div>
 	<div class="large-13 columns">

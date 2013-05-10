@@ -10,6 +10,8 @@ urlpatterns = patterns('',
 	url(r'^cpanel/change_password$', views.cpanel_change_password),
 	url(r'^cpanel/edit$', views.cpanel_edit_profile),
 	url(r'^cpanel/deals/$', views.cpanel_view_deals),
+	url(r'^cpanel/retweet_deals/$', views.retweet_deals),
 	url(r'^cpanel/deals/edit/(?P<did>\d+)/$', views.cpanel_edit_deal),
 	url(r'^cpanel/deals/delete/(?P<did>\d+)/$', views.cpanel_delete_deal),
+
 )

@@ -1,0 +1,32 @@
+{% extends "member/cpanel/index.html" %}
+{% block cpanel_profile_block %}
+{% if deals %}
+	<form  action="/member/cpanel/retweet_deals/" method="POST">
+	<table class="member_deal_list_edit">
+		<tr>
+			<th>Member</th>
+			<th>Title</th>
+			<th>Date Posted</th>
+			<th>Select</th>
+		</tr>
+	{% for deal in deals %}
+		<tr>
+			<td><h6>{{ deal.member_pk }}</h6></td>
+			<td><p><a href="/deal/view/{{ deal.id }}" target="_blank">{{ deal.title }}</a></p></td>
+			<td>{{ deal.date_created }}</td>
+			<td>
+				<input type="checkbox" value="{{ deal.id }}" name="deal_id">
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% csrf_token %}
+	 <input type="submit" value="RETWEET SELECTED" class="button small">
+	</form>
+{% else %}
+	<h6>Oops, you still haven't posted any deals yet</h6>
+{% endif %}
+{% endblock cpanel_profile_block %}
+{% block javascript %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/member/cpanel.js"></script>
+{% endblock javascript %}

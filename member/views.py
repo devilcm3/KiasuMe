@@ -3,19 +3,18 @@ import uuid
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.utils import simplejson
 from django.core.exceptions import PermissionDenied
 from member.models import Profile, RegEmail
-from member.forms import EditProfileForm, NewProfileForm, ChangePasswordForm, ResetPasswordForm
-from deal.forms import GetDealForm
-from store.models import Store
+from member.forms import *
 from deal.models import Deal, Subcategory
-from member.utils import reset_password_mail
+from django.contrib.admin.views.decorators import staff_member_required
 
 def reset_password(request):
 	if request.method == 'POST':
 		p = Profile.objects.filter(username = request.POST['username'], email= request.POST['email'])
 		if p.exists():
+			from member.utils import reset_password_mail
+
 			p = p[0]
 			newpass = str(uuid.uuid4()).split('-')[0]
 			p.set_password(newpass)
@@ -143,6 +142,9 @@ def cpanel_view_deals(request):
 
 @login_required
 def cpanel_edit_deal(request,did):
+	from deal.forms import GetDealForm
+	from django.utils import simplejson
+
 	subcategories = simplejson.dumps([{'name':o.name,'id':o.id,'category':o.category_pk.id} for o in Subcategory.objects.all().select_related()])
 	try:
 		deal = Deal.objects.get(id=did, member_pk=request.user.id)
@@ -168,6 +170,23 @@ def cpanel_delete_deal(request,did):
 		return redirect('/member/cpanel/deals')
 	except:
 		raise PermissionDenied
+
+@staff_member_required
+def retweet_deals(request):
+	if request.method == 'POST':
+		if request.POST.getlist('deal_id'):
+			from twitter import *
+			from project_dante import settings
+			from random import randint
+			t = Twitter(auth = OAuth(settings.KIASU_OAUTH_TOKEN, settings.KIASU_OAUTH_SECRET, settings.KIASU_CONSUMER_KEY, settings.KIASU_CONSUMER_SECRET))
+
+			for deal in Deal.objects.filter(id__in=request.POST.getlist('deal_id')).only('id','title','member_pk'):
+				status_msg = deal.member_pk.username[:15]+" posted: "+deal.title[:75]+"... #sg #discount kiasu.me/dv/" + str(deal.id) + "/" + str(randint(1,100))
+				t.statuses.update(status = status_msg)
+
+				
+	deals = Deal.objects.order_by('-date_created').select_related()[:25]
+	return render(request,'member/cpanel/retweet_deals.html',{'deals':deals,'menu_active': {'retweet_deals':'active'}})
 
 def login_error(request):
 	return render(request,'member/login_error.html')
