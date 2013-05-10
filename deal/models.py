@@ -114,7 +114,7 @@ class Deal(models.Model):
 
 			try:
 				t = Twitter(auth = OAuth(settings.KIASU_OAUTH_TOKEN, settings.KIASU_OAUTH_SECRET, settings.KIASU_CONSUMER_KEY, settings.KIASU_CONSUMER_SECRET))
-				status_msg = self.title[:95] +" #sg #discount" +" www.kiasu.me/deal/view/"+str(self.id)
+				status_msg = self.member_pk.username[:15]+" posted: "+self.title[:80]+"... #sg #discount" +" kiasu.me/dv/"+str(self.id)
 				t.statuses.update(status = status_msg)
 				ping_google()
 			except:

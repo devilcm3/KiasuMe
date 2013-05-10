@@ -106,4 +106,10 @@ function categorize_subcategories(){
 	        $('div.subcategory_row').append(tempStr);
 	    };
 	};
+
+	var cat_val = $('select#id_category_pk').val();
+	$( 'div.subcategory_row > select' ).attr('disabled','disabled');
+	$( 'div.subcategory_row > select' ).hide();
+	$( 'div.subcategory_row > select.category_'+cat_val ).removeAttr('disabled');
+	$( 'div.subcategory_row > select.category_'+cat_val ).show();
 }
