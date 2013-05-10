@@ -3,6 +3,7 @@ from django.db import models
 from django.forms import ModelForm
 from member.models import Profile
 from datetime import datetime, date
+from django.utils import timezone
 from uuid import uuid4
 
 import random,os
@@ -46,8 +47,8 @@ class Deal(models.Model):
 	active			= models.BooleanField(default = True)
 	date_created	= models.DateTimeField(auto_now_add = True)
 	date_modified 	= models.DateTimeField(auto_now = True)
-	date_started	= models.DateField(default = date.today())
-	date_ended		= models.DateField(default = date.today())
+	date_started	= models.DateField(default = timezone.now())
+	date_ended		= models.DateField(default = timezone.now())
 	promo_thumbnail = models.URLField(max_length = 250, blank = True, null = True, default = get_file_upload_path(''))
 	promo_image		= models.ImageField(max_length = 250, upload_to = get_file_upload_path, blank = True)
 	promo_file		= models.FileField(upload_to = get_file_upload_path, blank = True)
@@ -107,11 +108,17 @@ class Deal(models.Model):
 			super(Deal,self).save(*args, **kwargs)
 
 		if new:
+			from django.contrib.sitemaps import ping_google
 			from twitter import *
 			from project_dante import settings
-			t = Twitter(auth = OAuth(settings.KIASU_OAUTH_TOKEN, settings.KIASU_OAUTH_SECRET, settings.KIASU_CONSUMER_KEY, settings.KIASU_CONSUMER_SECRET))
-			status_msg = self.title[:95] +" #sg #discount" +" www.kiasu.me/deal/view/"+str(self.id)
-			t.statuses.update(status = status_msg)
+
+			try:
+				t = Twitter(auth = OAuth(settings.KIASU_OAUTH_TOKEN, settings.KIASU_OAUTH_SECRET, settings.KIASU_CONSUMER_KEY, settings.KIASU_CONSUMER_SECRET))
+				status_msg = self.title[:95] +" #sg #discount" +" www.kiasu.me/deal/view/"+str(self.id)
+				t.statuses.update(status = status_msg)
+				ping_google()
+			except:
+				pass
 
 class DealRating(models.Model):
 	vote			= models.NullBooleanField(blank=True,default=None)

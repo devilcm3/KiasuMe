@@ -1182,7 +1182,7 @@ dl {
   font-size: 1em;
   line-height: 1.6;
   margin-bottom: 0.5em;
-  list-style-position: outside;
+  list-style-position: inside;
   font-family: inherit; }
 
 /* Unordered Lists */
