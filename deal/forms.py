@@ -17,10 +17,11 @@ class DealForm(forms.ModelForm):
 		if('content' in cleaned_data):
 			cleaned_data['content'] = cleaned_data['content'].replace('script','')
 
-		if(date_ended < date_started):
-			raise forms.ValidationError("DATE ENDED cannot be earlier than DATE STARTED")
-		elif(date_started < date.today()):
-			raise forms.ValidationError("DATE STARTED and DATE ENDED starting from today onwards")
+		if(date_ended is not None):
+			if(date_ended < date_started):
+				raise forms.ValidationError("DATE ENDED cannot be earlier than DATE STARTED")
+			elif(date_started < date.today()):
+				raise forms.ValidationError("DATE STARTED and DATE ENDED starting from today onwards")
 			
 		if(promo_image):
 			if (promo_image.size > 2097152):

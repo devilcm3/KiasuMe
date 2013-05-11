@@ -36,10 +36,12 @@
 							<p><b>Subcategory</b><br><a href="/deal/{{ deal.category_pk.id }}/{{ deal.category_pk.name }}/{{ deal.subcategory_pk.id }}/{{ deal.subcategory_pk.name }}">{{ deal.subcategory_pk.name }}</a></p>
 						{% endif %}
 						<p><b>Valid</b><br>
-							{{ deal.date_started | date:"l, d F" }}
-							{% if deal.date_started != deal.date_ended %}<br>
-							<b>Expired After</b><br>
+							{{ deal.date_started | date:"l, d F" }}<br>
+							<b>Until</b><br>
+							{% if deal.date_ended %}<br>
 							{{ deal.date_ended | date:"l, d F" }}
+							{% else %}
+							- not stated -
 							{% endif %}
 						</p>	
 					</div>

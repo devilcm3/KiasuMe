@@ -63,9 +63,10 @@ google_ad_height = 90;
 			<h5 class="deal_small">
 			<small>
 				<span><b>Posted : </b>{{ deal.date_created | date:"l, d F - h:i A" }}</span>
-				<span><b>Valid : </b>{{ deal.date_started }}
-				{% if deal.date_started != deal.date_ended %}
-				- {{ deal.date_ended }}
+				{% if deal.date_ended %}
+				<span><b>Valid : </b>{{ deal.date_started }} - {{ deal.date_ended }}
+				{% else %}
+				<span><b>Valid From : </b>{{ deal.date_started }}
 				{% endif %}
 				</span>
 			</small>

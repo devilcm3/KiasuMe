@@ -33,24 +33,25 @@ function dealValidation(){
 		$('#id_category_pk').addClass('error_field');
 	}
 
-
-	var dateStart 	= $('#id_date_started').val().split('-');
-	var dateEnd 	= $('#id_date_ended').val().split('-');
-
 	var dateError = false;
-	if (dateStart[0] > dateEnd[0]){
-		// CHECK YEAR 
-		dateError = true;
-		console.log('year error');
-	} else {
-		if (dateStart[1] > dateEnd[1]){
-			//CHECK MONTH
+	if($('#id_date_ended').val().length != 0){
+		var dateStart 	= $('#id_date_started').val().split('-');
+		var dateEnd 	= $('#id_date_ended').val().split('-');
+
+		if (dateStart[0] > dateEnd[0]){
+			// CHECK YEAR 
 			dateError = true;
-			console.log('month error');
+			console.log('year error');
 		} else {
-			if (dateStart[1] >= dateEnd[1] && dateStart[2] > dateEnd[2]){
+			if (dateStart[1] > dateEnd[1]){
+				//CHECK MONTH
 				dateError = true;
-				console.log('day error');
+				console.log('month error');
+			} else {
+				if (dateStart[1] >= dateEnd[1] && dateStart[2] > dateEnd[2]){
+					dateError = true;
+					console.log('day error');
+				}
 			}
 		}
 	}

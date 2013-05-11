@@ -6,14 +6,15 @@
 		<tr>
 			<th>Member</th>
 			<th>Title</th>
-			<th>Date Posted</th>
+			<th>Date Valid</th>
 			<th>Select</th>
 		</tr>
 	{% for deal in deals %}
 		<tr>
 			<td><h6>{{ deal.member_pk }}</h6></td>
 			<td><p><a href="/deal/view/{{ deal.id }}" target="_blank">{{ deal.title }}</a></p></td>
-			<td>{{ deal.date_created }}</td>
+			<td>{{ deal.date_started }}<br><br>
+			{{ deal.date_ended }}</td>
 			<td>
 				<input type="checkbox" value="{{ deal.id }}" name="deal_id">
 			</td>

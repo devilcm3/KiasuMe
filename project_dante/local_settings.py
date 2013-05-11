@@ -22,6 +22,10 @@ if  LOCALSETTINGS:
 	    os.path.join(PROJECT_ROOT,'static/'),
 	)
 else:
+	KIASU_CONSUMER_KEY = '4TSdAbMvYknaSJ1Vhse9w'
+	KIASU_CONSUMER_SECRET = 'oX4Uhow9Ow4x2bkpifQdLg4lTkJJRDGMsmeCJg3uFQ'
+	KIASU_OAUTH_TOKEN = '1379317524-I31uMphW3yDJ1dLtSRYAzdlprkBd1dIan6M0OAG'
+	KIASU_OAUTH_SECRET = 'mdonJv5oU50Q4SoIuyV1PApIiOdXLwfuyk7hawHILTU'
 	pass
 	# AMAZON S3 STORAGE
 	# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'

@@ -48,7 +48,7 @@ class Deal(models.Model):
 	date_created	= models.DateTimeField(auto_now_add = True)
 	date_modified 	= models.DateTimeField(auto_now = True)
 	date_started	= models.DateField(default = timezone.now())
-	date_ended		= models.DateField(default = timezone.now())
+	date_ended		= models.DateField(blank = True, null = True)
 	promo_thumbnail = models.URLField(max_length = 250, blank = True, null = True, default = get_file_upload_path(''))
 	promo_image		= models.ImageField(max_length = 250, upload_to = get_file_upload_path, blank = True)
 	promo_file		= models.FileField(upload_to = get_file_upload_path, blank = True)
