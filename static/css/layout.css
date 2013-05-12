@@ -151,8 +151,8 @@ a.vote_login_prompt{
 }
 
 div.deal_description{
-	max-height: 12.2em;
-	overflow: hidden;
+    max-height: 25em;
+    overflow-y: auto;
 }
 .deal_footer{
 	margin-bottom: 0.5em;
