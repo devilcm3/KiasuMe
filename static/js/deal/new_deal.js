@@ -1,10 +1,11 @@
 $(document).ready(function(){
 	$('.js_error').hide();
 	CKEDITOR.replace('id_content');
-	$('.dates input').datepicker({
+	$('.dates input[name="date_started"]').datepicker({
 		'dateFormat':'yy-mm-dd',
 		'minDate':0
 	});
+	$('.dates input').datepicker('setDate', new Date());
 
 	$(document).foundation('tooltips');
 	categorize_subcategories();

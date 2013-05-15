@@ -100,6 +100,12 @@
 			</h5>
 		</div>
 	</div>
+	<div class="row">
+		<div class="large-16 columns">
+			<div class="fb-like" data-send="false" data-layout="button_count" data-width="10" data-show-faces="false" data-href="http://www.kiasu.me/deal/view/{{ deal.id }}/{{ deal.slug }}"></div>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-text="{{ deal.title | truncatechars:100 }} via @kiasume" data-url="http://kiasu.me/dv/{{ deal.id }}">Tweet</a>
+		</div>
+	</div>
 </div>
 {% endfor %}
 <div class="pagination-centered">
