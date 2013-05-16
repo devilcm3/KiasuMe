@@ -66,7 +66,8 @@ def category(request, category_id, category_name, subcategory_id = None, subcate
 	return render(request,'common/layout.html',context)
 
 def vote(request):
-	if request.user.is_authenticated() and request.is_ajax():
+	# if request.user.is_authenticated() and request.is_ajax():
+	if request.is_ajax():
 		Deal.vote(request.POST['promo_id'], request.POST['promo_vote'])
 		return HttpResponse(status = 200)
 	else:

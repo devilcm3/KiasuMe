@@ -3,6 +3,10 @@
 		display: none !important;
 	}
 }
+.comment_count{
+	color: #777;
+	vertical-align: super;
+}
 .full_image{
 	left: 0;
 	right: 0;
