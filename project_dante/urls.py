@@ -35,7 +35,9 @@ urlpatterns = patterns('',
     url(r'^disclaimer/',TemplateView.as_view(template_name='common/disclaimer.html')),
     url(r'^privacy/',TemplateView.as_view(template_name='common/privacy.html')),
     url(r'^support/',TemplateView.as_view(template_name='common/support.html')),
+    url(r'^sorry/',TemplateView.as_view(template_name='common/sorry.html')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps,'template_name': 'common/sitemap.html'}),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
