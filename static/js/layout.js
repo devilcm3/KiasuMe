@@ -27,6 +27,10 @@ $(document).ready(function(){
 		$(this).css('display','none');
 		$(this).children('img').attr('src','');
 	});
+
+	if (($('#google-ads-1').height()==0) && ($('#google-ads-1')!=undefined)){
+	    window.location = '/sorry';
+	}
 });
 
 //INPUT CRSF

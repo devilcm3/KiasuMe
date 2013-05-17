@@ -182,7 +182,7 @@ def retweet_deals(request):
 
 			for deal in Deal.objects.filter(id__in=request.POST.getlist('deal_id')).only('id','title','member_pk'):
 				try:
-					status_msg = deal.member_pk.username[:15]+" posted: "+deal.title[:75]+"... #sg #discount kiasu.me/dv/" + str(deal.id) + "/" + str(randint(1,100))
+					status_msg = deal.member_pk.username[:15]+" posted: "+deal.title[:75]+"... #fb #discount kiasu.me/dv/" + str(deal.id) + "/" + str(randint(1,100))
 					t.statuses.update(status = status_msg)
 				except:
 					pass

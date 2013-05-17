@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="large-16 columns">
+					<div class="large-16 content_blockumns">
 						<p><b>Category</b><br><a href="/deal/{{ deal.category_pk.id }}/{{ deal.category_pk.name }}">{{ deal.category_pk.name }}</a></p>
 						{% if deal.subcategory %}
 							<p><b>Subcategory</b><br><a href="/deal/{{ deal.category_pk.id }}/{{ deal.category_pk.name }}/{{ deal.subcategory_pk.id }}/{{ deal.subcategory_pk.name }}">{{ deal.subcategory_pk.name }}</a></p>
@@ -85,9 +85,9 @@
 					google_ad_height = 60;
 				} else if ( adWidth >= 356 ) {
 				  /* Large Rectangle (336 x 280) */
-					google_ad_slot = "1379784191";
-					google_ad_width = 336;
-					google_ad_height = 280;
+					google_ad_slot = "4472851394";
+					google_ad_width = 320;
+					google_ad_height = 50;
 				} else if ( adWidth >= 270 ) {
 				  /* Large Rectangle (336 x 280) */
 					google_ad_slot = "7007515391";
@@ -106,3 +106,13 @@
 <div class="fb-comments" data-href="http://kiasu.me/deal/view/{{ deal.id }}/{{ deal.slug }}" data-width="720" data-num-posts="50"></div>
 
 {% endblock content_block %}
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8980377318568626";
+/* Kiasu_Mobile */
+
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>

@@ -3,6 +3,13 @@
 		display: none !important;
 	}
 }
+#google-ads-1{
+	text-align: center;
+}
+#hot_deal_list > li{
+	font-size: 0.8em;
+	margin-bottom: 0.8em;
+}
 .comment_count{
 	color: #777;
 	vertical-align: super;
