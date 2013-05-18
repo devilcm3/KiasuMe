@@ -4,6 +4,7 @@
 	<form  action="/member/cpanel/retweet_deals/" method="POST">
 	<table class="member_deal_list_edit">
 		<tr>
+			<th>ID</th>
 			<th>Member</th>
 			<th>Title</th>
 			<th>Date Valid</th>
@@ -11,6 +12,7 @@
 		</tr>
 	{% for deal in deals %}
 		<tr>
+			<td><h6>{{ deal.id }}</h6></td>
 			<td><h6>{{ deal.member_pk }}</h6></td>
 			<td><p><a href="/deal/view/{{ deal.id }}" target="_blank">{{ deal.title }}</a></p></td>
 			<td>{{ deal.date_started }}<br><br>

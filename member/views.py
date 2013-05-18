@@ -187,8 +187,9 @@ def retweet_deals(request):
 				except:
 					pass
 
-				
-	deals = Deal.objects.order_by('-date_created').select_related()[:25]
+	from django.db.models import Q				
+	from datetime import date
+	deals = Deal.objects.filter(Q(date_ended__isnull=True) | Q(date_ended__gte=date.today())).order_by('-id').select_related()[:100]
 	return render(request,'member/cpanel/retweet_deals.html',{'deals':deals,'menu_active': {'retweet_deals':'active'}})
 
 def login_error(request):
