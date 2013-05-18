@@ -1,34 +1,80 @@
 {% extends "common/layout.html" %}
 {% block master_override_block %}
 <div class="large-16 columns about_us_wrapper">
-	<div class="row">
-		<div class="large-16 columns">
+	<div class="row block_1">
+		<div class="large-8 columns large-centered" style="text-align:center">
 			<h5>
 			Sorry :(
 			</h5>
 			<p>
 				As much as we love to bring you the latest deals and bargain.<br>
 				We also need to pay for the costs of running the website.<br>
-				If you are currently running an Ad Blocker, please kindly add us to your whitelist.<br><br>
-				We promise, no annoying ads, no popups, just simple ads.<br>
-				Simply by viewing our banners you have helped us to keep this website up and running<br>
-				Thank you very much for understanding!<br>
-				Here's a picture of a cat
+				If you are currently running an Ad Blocker, please kindly add us to your whitelist.<br>
 			</p>
-			<img src="http://kiasu.me/files/static/images/whitelist.jpg">
+			<div style="display: inline-block; width: 50%; margin: 0px auto;"><img src="http://kiasu.me/files/static/images/whitelist.jpg"></div>
+			<button style="display: inline-block; margin: 1% 10%;" id="unblock">OK! I HAVE WHITELISTED</button>
+			<button style="display: inline-block; margin: 1% 10%;" class="alert" id="block">NOPE THANKS</button>
 		</div>
 	</div>
-	<div class="row">
-		<div class="large-16 columns">
-			<h5>Contact us!</h5>
+	<div class="row block_2" style="opacity:0">
+		<div class="large-8 columns large-centered " style="text-align:center">
+			<h5>Y U NO WHITELIST =(</h5>
+			<div style="display: inline-block; width: 50%; margin: 0px auto;">
+			<img src="http://kiasu.me/files/static/images/sad_whitelist.jpg">
+			</div>
 			<p>
-				If you have any suggestions, complaints, or any other enquiries please contact to either one of email below.<br>
-				Email : <a href="mailto:david@kiasu.me">david@kiasu.me</a><br>
-				Email : <a href="mailto:support@kiasu.me">support@kiasu.me</a>
+				Well .. this is sad<br>
+				Can you do this at least :( <br>
+				Help us like our facebook page and tweet ... <br>
+				And we'll cool for a week .. (Y)
 			</p>
+			<div>
+			<div class="fb-like" data-href="https://www.facebook.com/KiasuMe" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+			<a href="https://twitter.com/share" class="twitter-share-button sorry-share" data-url="http://kiasu.me" data-count="vertical" data-text="Wanna know about latest discounts, bargains and deals in Singapore? follow @KiasuMe guys!" data-hashtags="bargain" style="vertical-align:bottom">Tweet</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</div>
 		</div>
 	</div>	
 </div>
 {% endblock master_override_block %}
 {% block javascript %}
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=139156246267349";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+window.fbAsyncInit = function(){
+	FB.Event.subscribe('edge.create',function(response){
+		fire();
+	});
+}
+
+$(document).ready(function(){
+	$('#block').click(function(){
+		$('.block_1').hide();
+		$('.block_2').css('opacity','1');
+	});
+
+	$('#unblock').click(function(){
+		window.location="/"
+	});
+
+	twttr.events.bind('click',function(event){
+		fire();
+	});
+});
+
+
+function fire(){
+	console.log('fire');
+	var date = new Date();
+	var hours = 168;
+	date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+	$.cookie('e_1_temp','1', { expires: date, path:'/' });
+}
+</script>
 {% endblock javascript %}

@@ -28,15 +28,13 @@ $(document).ready(function(){
 		$(this).children('img').attr('src','');
 	});
 
-	if (window.google_jobrunner==undefined && ($('#google-ads-1').length != 0)){
-		if($.cookie('e_1_temp')!='1'){
-			var date = new Date();
-	 		var minutes = 1;
-	 		date.setTime(date.getTime() + (minutes * 60 * 1000));
-	 		$.cookie('e_1_temp','1', { expires: date, path:'/' });
-	 		window.location = '/sorry/';
+	var jobrunner = setTimeout(function() {
+		if (window.google_jobrunner==undefined && ($('#google-ads-1').length != 0)){
+			if($.cookie('e_1_temp')!='1'){
+		 		window.location = '/sorry/';
+			}
 		}
-	}
+	}, 10000);
 });
 
 //INPUT CRSF
