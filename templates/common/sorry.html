@@ -25,13 +25,14 @@
 			<p>
 				Well .. this is sad<br>
 				Can you do this at least :( <br>
-				Help us like our facebook page and tweet ... <br>
+				Help us like or share in Facebook and Twitter <br>
 				And we'll cool for a week .. (Y)
 			</p>
 			<div>
 			<div class="fb-like" data-href="https://www.facebook.com/KiasuMe" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"></div>
 			<a href="https://twitter.com/share" class="twitter-share-button sorry-share" data-url="http://kiasu.me" data-count="vertical" data-text="Wanna know about latest discounts, bargains and deals in Singapore? follow @KiasuMe guys!" data-hashtags="bargain" style="vertical-align:bottom">Tweet</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<button id="share_fb" class="tiny" style="display:block; margin:1% auto">Share on Facebook</button>
 			</div>
 		</div>
 	</div>	
@@ -66,6 +67,13 @@ $(document).ready(function(){
 	twttr.events.bind('click',function(event){
 		fire();
 	});
+
+	$('#share_fb').click(function(){
+		var sharer = "https://www.facebook.com/sharer/sharer.php?u=";
+		var loc = "www.kiasu.me";
+		window.open(sharer + loc, 'sharer', 'width=626,height=436');
+		fire();
+	})
 });
 
 

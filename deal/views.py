@@ -5,7 +5,7 @@ from django.core import serializers
 from django.utils import simplejson
 from deal.models import *
 from deal.forms import *
-from datetime import date,time,datetime
+from datetime import date,time,datetime,timedelta
 from django.http import HttpResponse #,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -13,9 +13,9 @@ from django.core.paginator import Paginator
 
 def hot_deals(category_id = None):
 	if category_id:
-		return Deal.objects.filter(date_created__gte = date.today(), category_pk=category_id, active=True).values('id','title').order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__gte = (date.today()-timedelta(1)), category_pk=category_id, active=True).values('id','title').order_by('-total_vote')[:5]
 	else:
-		return Deal.objects.filter(date_created__gte = date.today(), active=True).values('id','title').order_by('-total_vote')[:5]
+		return Deal.objects.filter(date_created__gte = (date.today()-timedelta(1)), active=True).values('id','title').order_by('-total_vote')[:5]
 
 
 def index(request, page_num = 1):
@@ -66,7 +66,6 @@ def category(request, category_id, category_name, subcategory_id = None, subcate
 	return render(request,'common/layout.html',context)
 
 def vote(request):
-	# if request.user.is_authenticated() and request.is_ajax():
 	if request.is_ajax():
 		Deal.vote(request.POST['promo_id'], request.POST['promo_vote'])
 		return HttpResponse(status = 200)

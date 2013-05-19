@@ -29,10 +29,14 @@ $(document).ready(function(){
 	});
 
 	var jobrunner = setTimeout(function() {
-		if (window.google_jobrunner==undefined && ($('#google-ads-1').length != 0)){
-			if($.cookie('e_1_temp')!='1'){
-		 		window.location = '/sorry/';
+		if($.cookie('f1_ks_run')=='1'){
+			if (window.google_jobrunner==undefined && ($('#google-ads-1').length != 0)){
+				if($.cookie('e_1_temp')!='1'){
+			 		window.location = '/sorry/';
+				}
 			}
+		}else{
+			$.cookie('f1_ks_run','1',{expires:365, path:'/'});
 		}
 	}, 10000);
 });
@@ -63,15 +67,3 @@ beforeSend: function(xhr, settings) {
 
 //TWITTER
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
-//DISQUS
-/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-var disqus_shortname = 'kiasume'; // required: replace example with your forum shortname
-
-/* * * DON'T EDIT BELOW THIS LINE * * */
-(function () {
-    var s = document.createElement('script'); s.async = true;
-    s.type = 'text/javascript';
-    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-}());
