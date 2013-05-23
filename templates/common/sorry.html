@@ -25,7 +25,7 @@
 			<p>
 				Well .. this is sad<br>
 				Can you do this at least :( <br>
-				Help us like or share in Facebook and Twitter <br>
+				Help us like and share in Facebook and Twitter <br>
 				And we'll cool for a week .. (Y)
 			</p>
 			<div>
@@ -55,25 +55,18 @@ window.fbAsyncInit = function(){
 }
 
 $(document).ready(function(){
+	var date = new Date();
+	$.cookie('e_1_temp','1', { expires: 30, path:'/' });
+
 	$('#block').click(function(){
 		$('.block_1').hide();
 		$('.block_2').css('opacity','1');
+		fire();
 	});
 
 	$('#unblock').click(function(){
 		window.location="/"
 	});
-
-	twttr.events.bind('click',function(event){
-		fire();
-	});
-
-	$('#share_fb').click(function(){
-		var sharer = "https://www.facebook.com/sharer/sharer.php?u=";
-		var loc = "www.kiasu.me";
-		window.open(sharer + loc, 'sharer', 'width=626,height=436');
-		fire();
-	})
 });
 
 
