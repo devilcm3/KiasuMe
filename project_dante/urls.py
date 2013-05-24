@@ -36,6 +36,7 @@ urlpatterns = patterns('',
     url(r'^privacy/',TemplateView.as_view(template_name='common/privacy.html')),
     url(r'^support/',TemplateView.as_view(template_name='common/support.html')),
     url(r'^sorry/',TemplateView.as_view(template_name='common/sorry.html')),
+    url(r'^help/',TemplateView.as_view(template_name='common/help.html')),
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps,'template_name': 'common/sitemap.html'}),
 
 
