@@ -15,17 +15,29 @@ $(document).ready(function(){
 	});
 
 	$('.deal_thumbnail').click(function(){
-		$('.full_image img').attr('src',$(this).attr('full_src'));
+		var did = $(this).attr('deal_id');
+		var src = $(this).attr('full_src');
+		$('.full_image img').hide();
+		if ( $('.full_image img#'+did).length > 0 ){
+			$('.full_image img#'+did).show();
+		}else{
+			var elem = "<img id='"+did+"'' src='"+src+"'>";
+			$('.full_image div').append(elem);
+		}
 		$('.full_image').css('display','block');
 		$('.full_image > div').css('top',$(document).scrollTop());
-		$('.full_image img').css('opacity',0);
+
+		// $('.full_image img').attr('src',$(this).attr('full_src'));
+		// $('.full_image').css('display','block');
+		// $('.full_image > div').css('top',$(document).scrollTop());
+		// $('.full_image img').css('opacity',0);
 
 		// $('.full_image').css('top',top);
 	});
 
 	$('.full_image').click(function(){
-		$(this).css('display','none');
-		$(this).children('img').attr('src','');
+		$(this).hide();
+		$(this).children('img').hide();
 	});
 
 	var jobrunner = setTimeout(function() {

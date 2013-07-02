@@ -8,7 +8,7 @@ class LatestEntriesFeed(Feed):
 	description = "Everything about latest deals in KiasuME"
 
 	def items(self):
-		return Deal.objects.order_by('-date_created')[:5]
+		return Deal.objects.order_by('-date_created')[:10]
 
 	def item_title(self, item):
 		return item.title

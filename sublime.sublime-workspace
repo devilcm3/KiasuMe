@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ful",
+				"full_image"
+			],
+			[
 				"con",
 				"console"
 			],
@@ -510,19 +514,80 @@
 			[
 				"thumbnail",
 				"thumbnail_active"
-			],
-			[
-				"src",
-				"src"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"file": "static/js/layout.js",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 2533,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "deal/feeds.py",
+			"settings":
+			{
+				"buffer_size": 567,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "deal/urls.py",
+			"settings":
+			{
+				"buffer_size": 821,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/common/layout.html",
+			"settings":
+			{
+				"buffer_size": 5582,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/common/hot_sidebar.html",
+			"settings":
+			{
+				"buffer_size": 640,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/common/deal_list.html",
+			"settings":
+			{
+				"buffer_size": 4430,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/common/help.html",
+			"settings":
+			{
+				"buffer_size": 2738,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Files/Dropbox/Projects/MoreNurses_v3/index.html",
+			"settings":
+			{
+				"buffer_size": 10065,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "deal/management/commands/retweet_deals.py",
+			"settings":
+			{
+				"buffer_size": 1909,
 				"line_ending": "Unix"
 			}
 		}
@@ -611,27 +676,29 @@
 	},
 	"file_history":
 	[
+		"/Users/davidcokro_12/Library/Caches/Cleanup At Startup/Transmit/A6124191-8B86-47ED-B2B4-AD7758190DA6/retweet_deals.py",
+		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/deal_list.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/deal/models.py",
+		"/Volumes/Files/Dropbox/Projects/project_dante/deal/management/commands/retweet_deals.py",
+		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/hot_sidebar.html",
+		"/Volumes/Files/Dropbox/Projects/project_dante/project_dante/urls.py",
+		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/sorry.html",
+		"/Volumes/Files/Dropbox/Projects/project_dante/templates/member/cpanel/retweet_deals.html",
+		"/Volumes/Files/Dropbox/Projects/project_dante/static/js/deal/index_view.js",
+		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/layout.html",
+		"/Volumes/Files/Dropbox/Projects/project_dante/deal/views.py",
+		"/Volumes/Files/Download/Installation.sql",
 		"/Volumes/Files/Dropbox/Projects/project_dante/member/views.py",
 		"/Volumes/Files/Dropbox/Projects/project_dante/project_dante/settings.py",
 		"/Volumes/Files/Dropbox/Projects/project_dante/project_dante/local_settings.py",
-		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/layout.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/templates/deal/view.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/static/css/layout.css",
-		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/deal_list.html",
-		"/Volumes/Files/Dropbox/Projects/project_dante/static/js/deal/index_view.js",
-		"/Volumes/Files/Dropbox/Projects/project_dante/deal/management/commands/retweet_deals.py",
 		"/Volumes/Files/Dropbox/Projects/project_dante/static/js/layout.js",
-		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/sorry.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/templates/deal/search.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/deal/templatetags/deal_tags.py",
-		"/Volumes/Files/Dropbox/Projects/project_dante/deal/views.py",
-		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/hot_sidebar.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/member/management/commands/retweet_deals.py",
 		"/Volumes/Files/Dropbox/Projects/project_dante/member/management/commands/__init__.py",
-		"/Volumes/Files/Dropbox/Projects/project_dante/project_dante/urls.py",
 		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/about_us.html",
-		"/Volumes/Files/Dropbox/Projects/project_dante/templates/member/cpanel/retweet_deals.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/static/js/deal/new_deal.js",
 		"/Volumes/Files/Dropbox/Projects/project_dante/deal/urls.py",
 		"/Volumes/Files/Dropbox/Projects/project_dante/templates/deal/new_deal.html",
@@ -736,9 +803,7 @@
 		"/Volumes/Files/Dropbox/Projects/project_dante/templates/common/promotion_list.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/templates/promotion/view.html",
 		"/Volumes/Files/Dropbox/Projects/project_dante/promotion/urls.py",
-		"/Volumes/Files/Dropbox/Projects/project_dante/venv/lib/python2.7/site-packages/django/db/models/signals.py",
-		"/Volumes/Files/Dropbox/Projects/project_dante/static/css/social_foundicons.css",
-		"/Volumes/Files/Dropbox/Projects/project_dante/static/admin/js/prepopulate.js"
+		"/Volumes/Files/Dropbox/Projects/project_dante/venv/lib/python2.7/site-packages/django/db/models/signals.py"
 	],
 	"find":
 	{
@@ -765,6 +830,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hour",
+			"share_fb",
 			"datetime",
 			"date.",
 			"date",
@@ -890,9 +957,7 @@
 			"PDO",
 			"title",
 			"thermofilm backend",
-			"debug",
-			"upload",
-			"backend edit"
+			"debug"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -900,6 +965,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"food",
 			"KIASU_",
 			"form.non_field_errors",
 			"#1D84E6",
@@ -1012,14 +1078,209 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "static/js/layout.js",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 2533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1394,
+								1394
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "deal/feeds.py",
+					"settings":
+					{
+						"buffer_size": 567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								567,
+								567
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "deal/urls.py",
+					"settings":
+					{
+						"buffer_size": 821,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								795,
+								795
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "templates/common/layout.html",
+					"settings":
+					{
+						"buffer_size": 5582,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1693,
+								1693
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/common/hot_sidebar.html",
+					"settings":
+					{
+						"buffer_size": 640,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								640,
+								640
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/common/deal_list.html",
+					"settings":
+					{
+						"buffer_size": 4430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1242,
+								1242
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 134.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "templates/common/help.html",
+					"settings":
+					{
+						"buffer_size": 2738,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								773,
+								773
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Volumes/Files/Dropbox/Projects/MoreNurses_v3/index.html",
+					"settings":
+					{
+						"buffer_size": 10065,
 						"regions":
 						{
 						},
@@ -1032,7 +1293,63 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 0,
+					"file": "static/js/layout.js",
+					"settings":
+					{
+						"buffer_size": 2533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								683,
+								683
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "deal/management/commands/retweet_deals.py",
+					"settings":
+					{
+						"buffer_size": 1909,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1052,
+								1052
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1060,11 +1377,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1089,8 +1413,84 @@
 		"selected_items":
 		[
 			[
+				"retwee",
+				"deal/management/commands/retweet_deals.py"
+			],
+			[
+				"deallist",
+				"templates/common/deal_list.html"
+			],
+			[
+				"layjs",
+				"static/js/layout.js"
+			],
+			[
+				"hots",
+				"templates/common/hot_sidebar.html"
+			],
+			[
+				"lay",
+				"templates/common/layout.html"
+			],
+			[
+				"comm/retw",
+				"deal/management/commands/retweet_deals.py"
+			],
+			[
+				"retweet",
+				"templates/member/cpanel/retweet_deals.html"
+			],
+			[
+				"sorry",
+				"templates/common/sorry.html"
+			],
+			[
+				"url",
+				"project_dante/urls.py"
+			],
+			[
 				"hot",
 				"templates/common/hot_sidebar.html"
+			],
+			[
+				"dealmo",
+				"deal/models.py"
+			],
+			[
+				"dealfeed",
+				"deal/feeds.py"
+			],
+			[
+				"dealurl",
+				"deal/urls.py"
+			],
+			[
+				"deal/co",
+				"deal/management/commands/retweet_deals.py"
+			],
+			[
+				"dealmod",
+				"deal/models.py"
+			],
+			[
+				"deal/comm",
+				"deal/management/commands/retweet_deals.py"
+			],
+			[
+				"viewjs",
+				"static/js/deal/index_view.js"
+			],
+			[
+				"js/dea",
+				"static/js/deal/index_view.js"
+			],
+			[
+				"layhtml",
+				"templates/common/layout.html"
+			],
+			[
+				"dealview",
+				"deal/views.py"
 			],
 			[
 				"dealv",
@@ -1109,32 +1509,16 @@
 				"templates/common/sorry.html"
 			],
 			[
-				"layjs",
-				"static/js/layout.js"
-			],
-			[
 				"deal/man",
 				"deal/management/commands/retweet_deals.py"
-			],
-			[
-				"sorry",
-				"templates/common/sorry.html"
 			],
 			[
 				"ind",
 				"static/js/deal/index_view.js"
 			],
 			[
-				"lay",
-				"static/js/layout.js"
-			],
-			[
 				"dealviewhtml",
 				"templates/deal/view.html"
-			],
-			[
-				"dealview",
-				"deal/views.py"
 			],
 			[
 				"deall",
@@ -1161,28 +1545,12 @@
 				"member/views.py"
 			],
 			[
-				"retwee",
-				"deal/management/commands/retweet_deals.py"
-			],
-			[
 				"deal/rew",
 				"deal/management/commands/retweet_deals.py"
 			],
 			[
-				"deallist",
-				"templates/common/deal_list.html"
-			],
-			[
 				"aboutus",
 				"templates/common/about_us.html"
-			],
-			[
-				"url",
-				"project_dante/urls.py"
-			],
-			[
-				"dealmod",
-				"deal/models.py"
 			],
 			[
 				"dealviews",
@@ -1190,10 +1558,6 @@
 			],
 			[
 				"js/d",
-				"static/js/deal/index_view.js"
-			],
-			[
-				"js/dea",
 				"static/js/deal/index_view.js"
 			],
 			[
@@ -1237,16 +1601,8 @@
 				"deal/forms.py"
 			],
 			[
-				"retweet",
-				"templates/member/cpanel/retweet_deals.html"
-			],
-			[
 				"prourl",
 				"project_dante/urls.py"
-			],
-			[
-				"dealmo",
-				"deal/models.py"
 			],
 			[
 				"memvie",
@@ -1567,38 +1923,6 @@
 			[
 				"reset",
 				"templates/member/reset_password.html"
-			],
-			[
-				"register",
-				"templates/member/register.html"
-			],
-			[
-				"utils",
-				"member/utils.py"
-			],
-			[
-				"registeremail",
-				"templates/member/register_email_confirm.html"
-			],
-			[
-				"membmo",
-				"member/models.py"
-			],
-			[
-				"profile",
-				"templates/member/public_profile.html"
-			],
-			[
-				"emaillit",
-				"templates/email/boilerplate/email_lite.html"
-			],
-			[
-				"email",
-				"templates/email/boilerplate/email.html"
-			],
-			[
-				"settngs",
-				"project_dante/settings.py"
 			]
 		],
 		"width": 0.0

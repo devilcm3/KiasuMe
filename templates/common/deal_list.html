@@ -66,7 +66,7 @@
 			<div class="row">
 				<!--<a href="/deal/view/{{ deal.id }}/{{ deal.slug }}">-->
 				<a>
-				<img class="large-16 columns deal_thumbnail" src="{{ MEDIA_URL }}{{ deal.promo_thumbnail }}" full_src="{{ MEDIA_URL }}{{ deal.promo_image }}">
+				<img class="large-16 columns deal_thumbnail" src="{{ MEDIA_URL }}{{ deal.promo_thumbnail }}" deal_id="{{ deal.id }}" full_src="{{ MEDIA_URL }}{{ deal.promo_image }}">
 				</a>
 			</div>
 			{% endif %}
