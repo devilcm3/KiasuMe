@@ -46,8 +46,13 @@ class CategoryAdmin(admin.ModelAdmin):
 class SubcategoryAdmin(admin.ModelAdmin):
 	list_display = ('name','priority')
 
+class FacebookFeedAdmin(admin.ModelAdmin):
+	list_display = ('page_id','page_name','page_link','recent_feed','category_pk','member_pk')
+
+
 admin.site.register(Tag, TagAdmin)
 admin.site.register(DealRating, DealRatingAdmin)
 admin.site.register(Deal, DealAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Subcategory,SubcategoryAdmin)
+admin.site.register(FacebookFeed,FacebookFeedAdmin)

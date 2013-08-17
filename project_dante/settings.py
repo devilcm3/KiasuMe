@@ -104,6 +104,17 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -152,6 +163,7 @@ INSTALLED_APPS = (
     'store',
     'django_cleanup',
     'debug_toolbar',
+    # 'django_facebook'
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
@@ -163,7 +175,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 FACEBOOK_APP_ID = '139156246267349'
-FACEBOOK_API_SECRET = '9fae1ebd0fb9912bf9b1e9d47c735795'
+FACEBOOK_APP_SECRET = '9fae1ebd0fb9912bf9b1e9d47c735795'
 TWITTER_CONSUMER_KEY = 'i4yaIqzsHJLLufcYXnzFQ'
 TWITTER_CONSUMER_SECRET = 'IIHqHtRp61PJEZiJGLuLzaLRunmURKM1g0DjTBIgeA'
 TWITTER_EXTENDED_PERMISSIONS = ['email']

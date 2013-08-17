@@ -20,7 +20,7 @@ class Migration(SchemaMigration):
         db.create_table(u'deal_subcategory', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('category_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['deal.Category'])),
+            ('category_pk', self.gf('django.db.models.fields.related.ForeignKey')(related_name='subcategories', to=orm['deal.Category'])),
             ('priority', self.gf('django.db.models.fields.IntegerField')(max_length=3, null=True, blank=True)),
         ))
         db.send_create_signal(u'deal', ['Subcategory'])
@@ -35,15 +35,16 @@ class Migration(SchemaMigration):
         # Adding model 'Deal'
         db.create_table(u'deal_deal', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('link', self.gf('django.db.models.fields.SlugField')(max_length=200, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=150)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=200, blank=True)),
+            ('link', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
             ('content', self.gf('django.db.models.fields.TextField')()),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('date_modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('date_started', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2013, 4, 20, 0, 0))),
-            ('date_ended', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2013, 4, 20, 0, 0))),
-            ('promo_thumbnail', self.gf('django.db.models.fields.SlugField')(default='media/deal/2013/04/20/818bad6f-a4d7-44e1-9665-6b1cd9f5d414.jpeg', max_length=250, null=True, blank=True)),
+            ('date_started', self.gf('django.db.models.fields.DateField')()),
+            ('date_ended', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
+            ('promo_thumbnail', self.gf('django.db.models.fields.URLField')(default='media/deal/2013/08/17/f5cd7f84-7e94-4cf6-acb3-9df3d0470421.jpeg', max_length=250, null=True, blank=True)),
             ('promo_image', self.gf('django.db.models.fields.files.ImageField')(max_length=250, blank=True)),
             ('promo_file', self.gf('django.db.models.fields.files.FileField')(max_length=100, blank=True)),
             ('total_vote', self.gf('django.db.models.fields.FloatField')(default=0, blank=True)),
@@ -54,12 +55,13 @@ class Migration(SchemaMigration):
         db.send_create_signal(u'deal', ['Deal'])
 
         # Adding M2M table for field tag_pk on 'Deal'
-        db.create_table(u'deal_deal_tag_pk', (
+        m2m_table_name = db.shorten_name(u'deal_deal_tag_pk')
+        db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('deal', models.ForeignKey(orm[u'deal.deal'], null=False)),
             ('tag', models.ForeignKey(orm[u'deal.tag'], null=False))
         ))
-        db.create_unique(u'deal_deal_tag_pk', ['deal_id', 'tag_id'])
+        db.create_unique(m2m_table_name, ['deal_id', 'tag_id'])
 
         # Adding model 'DealRating'
         db.create_table(u'deal_dealrating', (
@@ -69,6 +71,17 @@ class Migration(SchemaMigration):
             ('member_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['member.Profile'])),
         ))
         db.send_create_signal(u'deal', ['DealRating'])
+
+        # Adding model 'FacebookFeed'
+        db.create_table(u'deal_facebookfeed', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('page_name', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('page_id', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
+            ('recent_feed', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
+            ('category_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['deal.Category'])),
+            ('member_pk', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['member.Profile'], null=True, blank=True)),
+        ))
+        db.send_create_signal(u'deal', ['FacebookFeed'])
 
 
     def backwards(self, orm):
@@ -85,10 +98,13 @@ class Migration(SchemaMigration):
         db.delete_table(u'deal_deal')
 
         # Removing M2M table for field tag_pk on 'Deal'
-        db.delete_table('deal_deal_tag_pk')
+        db.delete_table(db.shorten_name(u'deal_deal_tag_pk'))
 
         # Deleting model 'DealRating'
         db.delete_table(u'deal_dealrating')
+
+        # Deleting model 'FacebookFeed'
+        db.delete_table(u'deal_facebookfeed')
 
 
     models = {
@@ -124,18 +140,19 @@ class Migration(SchemaMigration):
             'category_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Category']"}),
             'content': ('django.db.models.fields.TextField', [], {}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'date_ended': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2013, 4, 20, 0, 0)'}),
+            'date_ended': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'date_started': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2013, 4, 20, 0, 0)'}),
+            'date_started': ('django.db.models.fields.DateField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'link': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'blank': 'True'}),
+            'link': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']", 'blank': 'True'}),
             'promo_file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'blank': 'True'}),
             'promo_image': ('django.db.models.fields.files.ImageField', [], {'max_length': '250', 'blank': 'True'}),
-            'promo_thumbnail': ('django.db.models.fields.SlugField', [], {'default': "'media/deal/2013/04/20/818bad6f-a4d7-44e1-9665-6b1cd9f5d414.jpeg'", 'max_length': '250', 'null': 'True', 'blank': 'True'}),
+            'promo_thumbnail': ('django.db.models.fields.URLField', [], {'default': "'media/deal/2013/08/17/f5cd7f84-7e94-4cf6-acb3-9df3d0470421.jpeg'", 'max_length': '250', 'null': 'True', 'blank': 'True'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '200', 'blank': 'True'}),
             'subcategory_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Subcategory']", 'null': 'True', 'blank': 'True'}),
             'tag_pk': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['deal.Tag']", 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
             'total_vote': ('django.db.models.fields.FloatField', [], {'default': '0', 'blank': 'True'})
         },
         u'deal.dealrating': {
@@ -145,9 +162,18 @@ class Migration(SchemaMigration):
             'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']"}),
             'vote': ('django.db.models.fields.NullBooleanField', [], {'default': 'None', 'null': 'True', 'blank': 'True'})
         },
+        u'deal.facebookfeed': {
+            'Meta': {'object_name': 'FacebookFeed'},
+            'category_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Category']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'member_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['member.Profile']", 'null': 'True', 'blank': 'True'}),
+            'page_id': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
+            'page_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'recent_feed': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'})
+        },
         u'deal.subcategory': {
             'Meta': {'object_name': 'Subcategory'},
-            'category_pk': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['deal.Category']"}),
+            'category_pk': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'subcategories'", 'to': u"orm['deal.Category']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'priority': ('django.db.models.fields.IntegerField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'})
@@ -159,9 +185,9 @@ class Migration(SchemaMigration):
         },
         u'member.profile': {
             'Meta': {'object_name': 'Profile'},
-            'address': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'address': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'deal_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['deal.Deal']", 'through': u"orm['deal.DealRating']", 'symmetrical': 'False'}),
+            'deal_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['deal.Deal']", 'null': 'True', 'through': u"orm['deal.DealRating']", 'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'fax': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
@@ -170,17 +196,17 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'landline_1': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'landline_1': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'landline_2': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'middle_name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             'mobile': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'store_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['store.Store']", 'through': u"orm['store.StoreRating']", 'symmetrical': 'False'}),
+            'store_rating_pk': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['store.Store']", 'null': 'True', 'through': u"orm['store.StoreRating']", 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
-            'website': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'blank': 'True'})
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'store.area': {
             'Meta': {'object_name': 'Area'},
@@ -202,7 +228,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'postcode': ('django.db.models.fields.IntegerField', [], {'max_length': '10'}),
             'total_vote': ('django.db.models.fields.FloatField', [], {'default': '0'}),
-            'website': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'blank': 'True'})
+            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'})
         },
         u'store.storerating': {
             'Meta': {'object_name': 'StoreRating'},

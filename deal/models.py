@@ -124,3 +124,25 @@ class DealRating(models.Model):
 	vote			= models.NullBooleanField(blank=True,default=None)
 	deal_pk			= models.ForeignKey('Deal')
 	member_pk		= models.ForeignKey('member.Profile')
+
+class FacebookFeed(models.Model):
+	page_name		= models.CharField(max_length=100,blank=True)
+	page_id			= models.CharField(max_length=100,blank=True)
+	page_link		= models.CharField(max_length=100,blank=True)
+	recent_feed		= models.CharField(max_length=100,blank=True)
+	category_pk		= models.ForeignKey('Category')
+	member_pk		= models.ForeignKey('member.Profile', blank=True, null=True)
+	
+	def save(self, *args, **kwargs):
+		from open_facebook.api import OpenFacebook
+		from project_dante import settings
+
+		if not self.member_pk:
+			self.member_pk = Profile.objects.get(username="kiasu_bot")
+			
+		graph = OpenFacebook(settings.FACEBOOK_APP_ID+'|'+settings.FACEBOOK_APP_SECRET)
+		data = graph.get(self.page_link)
+		self.page_id = data['id']
+		self.page_name = data['name']
+
+		super(FacebookFeed,self).save(*args, **kwargs)
