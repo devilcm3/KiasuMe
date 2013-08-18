@@ -18,13 +18,13 @@ class Command(BaseCommand):
 			keyword = r'\b(hot|deal|sale|promotion|off|free|[\d]{1,3}%{1})+'
 
 			for data in result:
-				if (data['post_id'] != p.recent_feed):
-					if (re.search(keyword,data['message'])):
+				if (data['post_id'] != p.recent_feed) and (p.recent_feed != ''):
+					if (re.search(keyword,data['message'],flags=re.I)):
 						media 				= data['attachment']['media'][0]
 						deal 				= Deal()
-						deal.title 			= "%s : %s ..." % (p.page_name, data['message'][:100]) 
+						deal.title 			= "%s : %s ..." % (p.page_name[:25], data['message'][:115]) 
 						deal.link 			= media['href']
-						deal.content 		= data['message'].replace('\n','<br>')
+						deal.content 		= '<p>' + data['message'].replace('\n','<br>') + '</p>'
 						deal.date_started	= date.today()
 						image_content 		= ContentFile(urllib2.urlopen(media['src'].replace('_s.','_n.')).read())
 						deal.promo_image.save(media['src'].split('/')[-1].replace('_s.','_n.'), image_content, save=False)
@@ -33,7 +33,6 @@ class Command(BaseCommand):
 						deal.save()
 				else:
 					break
-
 
 				p.recent_feed = result[0]['post_id'] #updates entry to the most recent feed
 				p.save()

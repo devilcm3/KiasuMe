@@ -40,17 +40,17 @@ $(document).ready(function(){
 		$(this).children('img').hide();
 	});
 
-	var jobrunner = setTimeout(function() {
-		if($.cookie('f1_ks_run')=='1'){
-			if (window.google_jobrunner==undefined && ($('#google-ads-1').length != 0)){
-				if($.cookie('e_1_temp')!='1'){
-			 		window.location = '/sorry/';
-				}
-			}
-		}else{
-			$.cookie('f1_ks_run','1',{expires:365, path:'/'});
-		}
-	}, 10000);
+	// var jobrunner = setTimeout(function() {
+	// 	if($.cookie('f1_ks_run')=='1'){
+	// 		if (window.google_jobrunner==undefined && ($('#google-ads-1').length != 0)){
+	// 			if($.cookie('e_1_temp')!='1'){
+	// 		 		window.location = '/sorry/';
+	// 			}
+	// 		}
+	// 	}else{
+	// 		$.cookie('f1_ks_run','1',{expires:365, path:'/'});
+	// 	}
+	// }, 10000);
 });
 
 //INPUT CRSF
