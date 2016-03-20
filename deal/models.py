@@ -127,7 +127,7 @@ class DealRating(models.Model):
 
 class FacebookFeed(models.Model):
 	page_name		= models.CharField(max_length=100,blank=True)
-	page_id			= models.CharField(max_length=100,blank=True)
+	page_id			= models.CharField(max_length=100,blank=True,unique=True)
 	page_link		= models.CharField(max_length=100,blank=True)
 	recent_feed		= models.CharField(max_length=100,blank=True)
 	category_pk		= models.ForeignKey('Category')
@@ -137,12 +137,12 @@ class FacebookFeed(models.Model):
 		from open_facebook.api import OpenFacebook
 		from project_dante import settings
 
-		if not self.member_pk:
+
+		if self.id is None:
 			self.member_pk = Profile.objects.get(username="kiasu_bot")
-			
-		graph = OpenFacebook(settings.FACEBOOK_APP_ID+'|'+settings.FACEBOOK_APP_SECRET)
-		data = graph.get(self.page_link)
-		self.page_id = data['id']
-		self.page_name = data['name']
+			graph = OpenFacebook(settings.FACEBOOK_APP_ID+'|'+settings.FACEBOOK_APP_SECRET)
+			data = graph.get(self.page_link)
+			self.page_id = data['id']
+			self.page_name = data['name']
 
 		super(FacebookFeed,self).save(*args, **kwargs)

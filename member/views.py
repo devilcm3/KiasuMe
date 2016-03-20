@@ -193,4 +193,5 @@ def retweet_deals(request):
 	return render(request,'member/cpanel/retweet_deals.html',{'deals':deals,'menu_active': {'retweet_deals':'active'}})
 
 def login_error(request):
+	print request
 	return render(request,'member/login_error.html')
